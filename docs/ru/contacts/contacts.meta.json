@@ -1,0 +1,10 @@
+{
+  "title": "Обратная связь",
+  "isBeta": false,
+    "hidden": true,
+  "metaTitle": "Обратная связь",
+  "pageDescription": "Contacts",
+  "sectionTitle": "Возможно, у нас уже есть ответ на ваш вопрос",
+  "decorator":"сontacts",
+  "uuid": "f3fbe832-cd6c-4435-b51b-c5c9728a95e3"
+}

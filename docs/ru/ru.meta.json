@@ -1,0 +1,31 @@
+{
+	"title": "База знаний",
+	"default": {
+	    "metaTitle": "База знаний",
+	    "metaDescription": ""
+	},
+	"intro": [
+        {
+        "partialPath": "/ru/hr/questions_and_answers/error_unep",
+        "icon": "",
+        "iconMobile": ""
+        },
+        {
+        "partialPath": "/ru/hr/company/application/faq/question1",
+        "icon": "",
+        "iconMobile": ""
+        },
+        {
+        "partialPath": "/ru/hr/company/application/faq/question2",
+        "icon": "",
+        "iconMobile": ""
+        },
+        {
+        "partialPath": "/ru/hr/company/application/faq/question3",
+        "icon": "",
+        "iconMobile": ""
+        }
+    ],
+	"serviceGroupLinks": [],
+	"uuid": "8039e837-cbc5-4f10-8185-59be352f986e"
+}
