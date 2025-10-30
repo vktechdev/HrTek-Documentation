@@ -1,0 +1,143 @@
+{
+  "batch_enabled": true,
+  "name": "Массовая рассылка с несколькими атрибутами и документом",
+  "group": "Массовая рассылка с несколькими атрибутами и документом",
+  "participants": [
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров"
+    },
+    {
+      "role": "Руководитель отдела кадров",
+      "group": "Руководитель отдела кадров"
+    }
+  ],
+  "nodes": [
+    {
+      "key": "start",
+      "state": {
+        "name": "Старт"
+      },
+      "node_type": "begin",
+      "actions": [
+        {
+          "roles": [
+            "Отдел кадров"
+          ],
+          "type": "system"
+        }
+      ]
+    },
+    {
+      "state": {
+        "name": "Загрузка документа"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [
+            "Отдел кадров"
+          ],
+          "attributes": [
+            {
+              "type": "choice",
+              "name": "Адрес по прописке совпадает с адресом проживания",
+              "required": true,
+              "options": {
+                "choices": [
+                  {
+                    "label": "Да, совпадает",
+                    "value": "1"
+                  },
+                  {
+                    "label": "Нет, не совпадает",
+                    "value": "2"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "textarea",
+              "name": "Комментарий",
+              "required": true
+            }
+          ],
+          "type": "upload",
+          "document_type": "Документ"
+        }
+      ]
+    },
+    {
+      "state": {
+        "name": "Подписание документа"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [
+            "Руководитель отдела кадров"
+          ],
+          "type": "sign",
+          "signature_type": "pep",
+          "document_type": "Документ"
+        }
+      ]
+    },
+    {
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Документ"
+        }
+      ]
+    },
+    {
+      "state": {
+        "name": "Подписание документа"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [],
+          "type": "sign",
+          "document_type": "Документ",
+          "signature_type": "pep",
+          "is_employee": true
+        }
+      ],
+      "deadline_settings": {
+        "reference": "node_active",
+        "unit": "day",
+        "term": 3,
+        "round_days": true
+      }
+    },
+    {
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Документ"
+        }
+      ]
+    },
+    {
+      "state": {
+        "name": "Завершено"
+      },
+      "node_type": "end",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ]
+    }
+  ]
+}

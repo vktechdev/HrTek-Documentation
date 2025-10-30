@@ -1,0 +1,179 @@
+{
+    "name": "Опция обезличивание роли в рамках БП",
+    "group": "Опция обезличивание роли в рамках БП",
+    "participants": [
+        {
+            "role": "Отдел кадров",
+            "group": "Отдел кадров"
+        }
+    ],
+    "options": {
+        "anonymous": {
+            "all_roles": false,
+            "roles": [
+                "Отдел кадров"
+            ]
+        }
+    },
+    "nodes": [
+        {
+            "key": "start",
+            "state": {
+                "name": "Старт"
+            },
+            "node_type": "begin",
+            "actions": [
+                {
+                    "roles": [],
+                    "type": "system",
+                    "is_employee": true
+                }
+            ]
+        },
+        {
+            "key": "step_1",
+            "state": {
+                "name": "Формирование заявления об изменении банковских реквизитов"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "roles": [],
+                    "attributes": [
+                        {
+                            "type": "text",
+                            "name": "Номер расчетного счета",
+                            "required": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "Наименование банка",
+                            "required": true
+                        },
+                        {
+                            "type": "text",
+                            "name": "БИК",
+                            "required": true
+                        },
+                        {
+                            "type": "file",
+                            "name": "Банковские реквизиты (в формате .pdf, .jpg)",
+                            "required": true
+                        }
+                    ],
+                    "type": "generate_document_from_template",
+                    "document_type": "Сообщение работодателю об изменении реквизитов для перевода заработной платы",
+                    "is_employee": true,
+                    "template": {
+                        "placeholders": [
+                            {
+                                "key": "Name",
+                                "attribute": "Наименование банка"
+                            },
+                            {
+                                "key": "Number",
+                                "attribute": "Номер расчетного счета"
+                            },
+                            {
+                                "key": "BIK",
+                                "attribute": "БИК"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "employee_cancelable": true
+        },
+        {
+            "key": "step_2",
+            "state": {
+                "name": "Подписание заявления об изменении банковских реквизитов"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "roles": [],
+                    "type": "sign",
+                    "signature_type": "pep",
+                    "is_employee": true,
+                    "document_type": "Сообщение работодателю об изменении реквизитов для перевода заработной платы"
+                }
+            ],
+            "employee_cancelable": true
+        },
+        {
+            "key": "step_3",
+            "state": {
+                "name": "Проверка подписи"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "system_validate_sign",
+                    "document_type": "Сообщение работодателю об изменении реквизитов для перевода заработной платы"
+                }
+            ]
+        },
+        {
+            "key": "step_4_return",
+            "node_type": "middle",
+            "state": {
+                "name": "Проверка заявления"
+            },
+            "actions": [
+                {
+                    "type": "accept",
+                    "roles": [
+                        "Отдел кадров"
+                    ]
+                },
+                {
+                    "type": "return",
+                    "roles": [
+                        "Отдел кадров"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "end",
+            "state": {
+                "name": "Завершено"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ]
+        }
+    ],
+    "transitions": [
+        {
+            "from": "start",
+            "to": "step_1"
+        },
+        {
+            "from": "step_1",
+            "to": "step_2"
+        },
+        {
+            "from": "step_2",
+            "to": "step_3"
+        },
+        {
+            "from": "step_3",
+            "to": "step_4_return"
+        },
+        {
+            "from": "step_4_return",
+            "to": "end",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_4_return",
+            "to": "step_1",
+            "action_type": "return"
+        }
+    ]
+}
