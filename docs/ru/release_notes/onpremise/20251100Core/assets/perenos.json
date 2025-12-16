@@ -1,0 +1,317 @@
+{
+  "name": "Тест перенос отпуска с мета атрибутами",
+  "group": "Тест перенос отпуска с мета атрибутами",
+  "participants": [
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров"
+    }
+  ],
+  "validators": [
+    {
+      "type": "min_date",
+      "attributes": [
+        "Исходная дата начала отпуска"
+      ],
+      "settings": {
+        "days_count": 14,
+        "working_days_only": true
+      }
+    },
+    {
+      "type": "min_date",
+      "attributes": [
+        "Новая дата начала отпуска 1"
+      ],
+      "settings": {
+        "days_count": 14,
+        "working_days_only": false
+      }
+    },
+    {
+      "type": "min_duration",
+      "attributes": [
+        "Исходная дата начала отпуска",
+        "Исходная дата окончания отпуска"
+      ],
+      "settings": {
+        "min_duration": 0,
+        "working_days_only": true
+      }
+    },
+    {
+      "type": "min_duration",
+      "attributes": [
+        "Новая дата начала отпуска 1",
+        "Новая дата окончания отпуска 1"
+      ],
+      "settings": {
+        "min_duration": 0,
+        "working_days_only": false
+      }
+    },
+    {
+      "type": "compare_date_collection",
+      "attributes": [
+        "Количество дней в исходном периоде",
+        "Новая дата начала отпуска 1",
+        "Новая дата окончания отпуска 1"
+      ],
+      "settings": {
+        "operation": "eq",
+        "working_days_only": false,
+        "holidays_exclusion": true
+      }
+    },
+    {
+      "type": "without_intersection_date_collection",
+      "attributes": [
+        "Новая дата начала отпуска 1",
+        "Новая дата окончания отпуска 1"
+      ]
+    },
+    {
+      "type": "absence_overlap",
+      "attributes": [
+        "Новая дата начала отпуска 1",
+        "Новая дата окончания отпуска 1"
+      ],
+      "settings": {
+        "rules": {
+          "Командировка": "W",
+          "Больничный": "E",
+          "Учебный отпуск": "A"
+        },
+        "messages": {
+          "W": "Внимание!",
+          "E": "Запрещено!",
+          "A": "Внимание2!"
+        }
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "key": "start",
+      "state": {
+        "name": "Старт"
+      },
+      "node_type": "begin",
+      "actions": [
+        {
+          "roles": [],
+          "type": "system",
+          "is_employee": true
+        }
+      ]
+    },
+    {
+      "key": "accept1",
+      "state": {
+        "name": "Формирование заявления"
+      },
+      "node_type": "middle",
+      "action": {
+        "roles": [],
+        "attributes": [
+          {
+            "type": "date",
+            "name": "Исходная дата начала отпуска",
+            "options": {
+              "alias": "$original_start_date"
+            }
+          },
+          {
+            "type": "date",
+            "name": "Исходная дата окончания отпуска",
+            "options": {
+              "alias": "$original_end_date"
+            }
+          },
+          {
+            "type": "text",
+            "name": "Количество дней в исходном периоде",
+            "options": {
+              "expression": "vacation_days($original_start_date, $original_end_date)",
+              "info_type": "original_vacation_days",
+            }
+          },
+          {
+            "type": "date",
+            "name": "Новая дата начала отпуска 1",
+            "options": {
+              "alias": "$newstart"
+            }
+          },
+          {
+            "type": "date",
+            "name": "Новая дата окончания отпуска 1",
+            "options": {
+              "alias": "$newend"
+            }
+          },
+          {
+            "type": "text",
+            "name": "Количество дней в новом периоде",
+            "options": {
+              "expression": "vacation_days($newstart, $newend)"
+            }
+          }
+        ],
+        "attributes_meta": [
+          {
+            "type": "block",
+            "title": "Исходный даты отпуска",
+            "classes": [
+              "half-width"
+            ],
+            "objects": [
+              {
+                "type": "attribute",
+                "name": "Исходная дата начала отпуска"
+              },
+              {
+                "type": "attribute",
+                "name": "Исходная дата окончания отпуска"
+              },
+              {
+                "type": "attribute",
+                "name": "Количество дней в исходном периоде"
+              }
+            ]
+          },
+          {
+            "type": "document",
+            "title": "Новые даты отпуска",
+            "is_multiple": true,
+            "classes": [
+              "half-width"
+            ],
+            "objects": [
+              {
+                "type": "block",
+                "objects": [
+                  {
+                    "type": "row",
+                    "objects": [
+                      {
+                        "type": "attribute",
+                        "name": "Новая дата начала отпуска 1"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "row",
+                    "objects": [
+                      {
+                        "type": "attribute",
+                        "name": "Новая дата окончания отпуска 1"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "row",
+                    "objects": [
+                      {
+                        "type": "attribute",
+                        "name": "Количество дней в новом периоде"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "type": "generate_document_from_template",
+        "document_type": "Заявление о переносе планового отпуска",
+        "is_employee": true,
+        "template": {
+          "placeholders": [
+            {
+              "key": "DateFrom",
+              "attribute": "Исходная дата начала отпуска"
+            },
+            {
+              "key": "DateTo",
+              "attribute": "Исходная дата окончания отпуска"
+            },
+            {
+              "key": "Count",
+              "attribute": "Количество дней в исходном периоде"
+            },
+            {
+              "key": "NewDateFrom",
+              "attribute": "Новая дата начала отпуска 1"
+            },
+            {
+              "key": "NewDateTo",
+              "attribute": "Новая дата окончания отпуска 1"
+            },
+            {
+              "key": "NewCount",
+              "attribute": "Количество дней в новом периоде"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "step2",
+      "state": {
+        "name": "Подписание заявления"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [],
+          "type": "sign",
+          "signature_type": "unep",
+          "is_employee": true,
+          "document_type": "Заявление о переносе планового отпуска"
+        }
+      ],
+      "employee_cancelable": true
+    },
+    {
+      "key": "step3",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Заявление о переносе планового отпуска"
+        }
+      ]
+    },
+    {
+      "key": "step4",
+      "state": {
+        "name": "Проверка заявления"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [
+            "Отдел кадров"
+          ],
+          "type": "accept",
+          "name": "Согласовать"
+        }
+      ],
+      "employee_cancelable": true
+    },
+    {
+      "key": "end",
+      "state": {
+        "name": "Финиш"
+      },
+      "node_type": "end",
+      "action": {
+        "type": "system"
+      }
+    }
+  ]
+}
