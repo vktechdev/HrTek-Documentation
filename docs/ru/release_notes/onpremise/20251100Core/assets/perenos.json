@@ -1,6 +1,6 @@
 {
-  "name": "Тест перенос отпуска с мета атрибутами",
-  "group": "Тест перенос отпуска с мета атрибутами",
+  "name": "Тест перенос отпуска с мета атрибутами (v1)",
+  "group": "Тест перенос отпуска с мета атрибутами (v1)",
   "participants": [
     {
       "role": "Отдел кадров",
@@ -11,32 +11,11 @@
     {
       "type": "min_date",
       "attributes": [
-        "Исходная дата начала отпуска"
-      ],
-      "settings": {
-        "days_count": 14,
-        "working_days_only": true
-      }
-    },
-    {
-      "type": "min_date",
-      "attributes": [
         "Новая дата начала отпуска 1"
       ],
       "settings": {
         "days_count": 14,
         "working_days_only": false
-      }
-    },
-    {
-      "type": "min_duration",
-      "attributes": [
-        "Исходная дата начала отпуска",
-        "Исходная дата окончания отпуска"
-      ],
-      "settings": {
-        "min_duration": 0,
-        "working_days_only": true
       }
     },
     {
@@ -53,6 +32,8 @@
     {
       "type": "compare_date_collection",
       "attributes": [
+        "Исходная дата начала отпуска",
+        "Исходная дата окончания отпуска",
         "Количество дней в исходном периоде",
         "Новая дата начала отпуска 1",
         "Новая дата окончания отпуска 1"
@@ -101,6 +82,7 @@
         {
           "roles": [],
           "type": "system",
+          "create_for_others": true,
           "is_employee": true
         }
       ]
@@ -133,7 +115,7 @@
             "name": "Количество дней в исходном периоде",
             "options": {
               "expression": "vacation_days($original_start_date, $original_end_date)",
-              "info_type": "original_vacation_days",
+              "info_type": "original_vacation_days"
             }
           },
           {
@@ -224,7 +206,7 @@
           }
         ],
         "type": "generate_document_from_template",
-        "document_type": "Заявление о переносе планового отпуска",
+        "document_type": "Заявление о переносе планового отпуска (v1)",
         "is_employee": true,
         "template": {
           "placeholders": [
@@ -268,7 +250,7 @@
           "type": "sign",
           "signature_type": "unep",
           "is_employee": true,
-          "document_type": "Заявление о переносе планового отпуска"
+          "document_type": "Заявление о переносе планового отпуска (v1)"
         }
       ],
       "employee_cancelable": true
@@ -282,7 +264,7 @@
       "actions": [
         {
           "type": "system_validate_sign",
-          "document_type": "Заявление о переносе планового отпуска"
+          "document_type": "Заявление о переносе планового отпуска (v1)"
         }
       ]
     },
