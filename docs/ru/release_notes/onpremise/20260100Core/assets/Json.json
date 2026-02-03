@@ -1,0 +1,77 @@
+{
+    "name": "По согласующему для каждого скоупа без сотрудника",
+    "group": "По согласующему для каждого скоупа без сотрудника",
+    "no_employee": true,
+    "participants": [
+        {
+            "role": "Согласующий руководитель",
+            "editable": true,
+            "required": false,
+            "editable_scope": "manager",
+            "editable_manager_type": [
+                "operational",
+                "legal"
+            ]
+        },
+        {
+            "role": "Отдел кадров",
+            "group": "Отдел кадров"
+        }
+    ],
+    "nodes": [
+        {
+            "key": "start",
+            "state": {
+                "name": "Старт"
+            },
+            "node_type": "begin",
+            "action": {
+                "type": "system",
+                "roles": [
+                    "Отдел кадров"
+                ]
+            }
+        },
+        {
+            "key": "step_1.1",
+            "state": {
+                "name": "Загрузка"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "roles": [
+                        "Отдел кадров"
+                    ],
+                    "type": "upload",
+                    "document_type": "Документ"
+                }
+            ]
+        },
+        {
+            "key": "step_1",
+            "state": {
+                "name": "Согласование"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "roles": [
+                        "Согласующий руководитель"
+                    ],
+                    "type": "accept"
+                }
+            ]
+        },
+        {
+            "key": "completed",
+            "state": {
+                "name": "Финиш"
+            },
+            "node_type": "end",
+            "action": {
+                "type": "system"
+            }
+        }
+    ]
+}
