@@ -1,27 +1,27 @@
 {
-	"title": "База знаний",
-	"metaTitle": "База знаний",
+	"title": "База знаний VK HR Tek",
+	"metaTitle": "База знаний VK HR Tek",
 	"metaDescription": "",
 	"intro": [
         {
         "partialPath": "/ru/hr/questions_and_answers/error_unep",
-        "icon": "",
-        "iconMobile": ""
+        "icon": "/ru/assets/arrow_right_circle_16.svg",
+        "iconMobile": "/ru/assets/arrow_right_circle_16.svg"
         },
         {
         "partialPath": "/ru/hr/company/application/faq/question1",
-        "icon": "",
-        "iconMobile": ""
+        "icon": "/ru/assets/arrow_right_circle_16.svg",
+        "iconMobile": "/ru/assets/arrow_right_circle_16.svg"
         },
         {
         "partialPath": "/ru/hr/company/application/faq/question2",
-        "icon": "",
-        "iconMobile": ""
+        "icon": "/ru/assets/arrow_right_circle_16.svg",
+        "iconMobile": "/ru/assets/arrow_right_circle_16.svg"
         },
         {
         "partialPath": "/ru/hr/company/application/faq/question3",
-        "icon": "",
-        "iconMobile": ""
+        "icon": "/ru/assets/arrow_right_circle_16.svg",
+        "iconMobile": "/ru/assets/arrow_right_circle_16.svg"
         }
     ],
 	"uuid": "8039e837-cbc5-4f10-8185-59be352f986e"
