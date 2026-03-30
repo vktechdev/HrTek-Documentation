@@ -1,0 +1,121 @@
+{
+    "name": "Загрузка списком сотрудников для массовой рассылки",
+    "group": "Загрузка списком сотрудников для массовой рассылки",
+    "batch_enabled": true,
+    "options": {
+        "add_list_employees": true
+    },
+    "participants": [
+        {
+            "role": "Отдел кадров",
+            "group": "Отдел кадров"
+        },
+        {
+            "role": "Руководитель отдела кадров",
+            "group": "Руководитель отдела кадров"
+        }
+    ],
+    "nodes": [
+        {
+            "key": "start",
+            "state": {
+                "name": "Старт"
+            },
+            "node_type": "begin",
+            "actions": [
+                {
+                    "roles": [
+                        "Отдел кадров"
+                    ],
+                    "type": "system"
+                }
+            ]
+        },
+        {
+            "state": {
+                "name": "Загрузка документа"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "roles": [
+                        "Отдел кадров"
+                    ],
+                    "attributes": [],
+                    "type": "upload",
+                    "document_type": "Документ"
+                }
+            ]
+        },
+        {
+            "state": {
+                "name": "Подписание документа"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "roles": [
+                        "Руководитель отдела кадров"
+                    ],
+                    "type": "sign",
+                    "document_type": "Документ"
+                }
+            ]
+        },
+        {
+            "state": {
+                "name": "Проверка подписи"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "system_validate_sign",
+                    "document_type": "Документ"
+                }
+            ]
+        },
+        {
+            "state": {
+                "name": "Подписание документа"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "roles": [],
+                    "type": "sign",
+                    "document_type": "Документ",
+                    "is_employee": true
+                }
+            ],
+            "deadline_settings": {
+                "reference": "node_active",
+                "unit": "day",
+                "term": 3,
+                "round_days": true
+            }
+        },
+        {
+            "state": {
+                "name": "Проверка подписи"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "system_validate_sign",
+                    "document_type": "Документ"
+                }
+            ]
+        },
+        {
+            "state": {
+                "name": "Завершено"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ]
+        }
+    ]
+}
