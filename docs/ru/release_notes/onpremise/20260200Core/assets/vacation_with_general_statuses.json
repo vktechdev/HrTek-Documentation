@@ -1,541 +1,421 @@
 {
-    "name": "Отпуск: Заявление на перенос ранее запланированного отпуска с общими статусами",
-    "group": "Отпуск: Заявление на перенос ранее запланированного отпуска с общими статусами",
-    "tags": [
-        "change_vacation_from_calendar"
-    ],
-    "participants": [
+  "name": "Отпуск без сохранения заработной платы c объединяющими статусами",
+  "group": "Отпуск без сохранения заработной платы c объединяющими статусами",
+  "tags": [
+    "отсутствие",
+    "Оформить отпуск"
+  ],
+  "participants": [
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров"
+    },
+    {
+      "role": "Руководитель отдела кадров",
+      "group": "Руководитель отдела кадров"
+    },
+    {
+      "role": "Бухгалтерия",
+      "group": "Бухгалтерия"
+    },
+    {
+      "role": "Директор",
+      "group": "Директор"
+    },
+    {
+      "role": "Руководитель управленческий 1"
+    },
+    {
+      "role": "Руководитель управленческий 2"
+    },
+    {
+      "role": "Руководитель управленческий 3"
+    },
+    {
+      "role": "Руководитель управленческий 4"
+    },
+    {
+      "role": "Руководитель управленческий 5"
+    },
+    {
+      "role": "Руководитель управленческий 6"
+    },
+    {
+      "role": "Руководитель управленческий 7"
+    },
+    {
+      "role": "Руководитель управленческий 8"
+    },
+    {
+      "role": "Руководитель управленческий 9"
+    },
+    {
+      "role": "Руководитель управленческий 10"
+    }
+  ],
+  "nodes": [
+    {
+      "key": "start",
+      "state": {
+        "name": "Старт"
+      },
+      "node_type": "begin",
+      "actions": [
         {
-            "role": "Отдел кадров",
-            "group": "Отдел кадров"
-        },
-        {
-            "role": "Руководитель управленческий 1"
+          "type": "system",
+          "is_employee": true
         }
-    ],
-    "nodes": [
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_1",
+      "state": {
+        "name": "Формирование заявления о предоставлении отпуска без сохранения заработной платы",
+        "description": "Вы можете выбрать любое количество дней"
+      },
+      "node_type": "middle",
+      "actions": [
         {
-            "key": "start",
-            "state": {
-                "name": "Старт"
+          "type": "generate_document_from_template",
+          "is_employee": true,
+          "document_type": "Заявление о предоставлении отпуска без сохранения заработной платы",
+          "attributes": [
+            {
+              "name": "Дата начала отпуска без сохранения ЗП",
+              "external_id": "b24aa2bc-b24d-4512-aff2-5d1e8c433079",
+              "type": "date",
+              "required": true
             },
-            "node_type": "begin",
-            "actions": [
-                {
-                    "type": "system",
-                    "is_employee": true,
-                    "roles": [],
-                    "create_for_others": true,
-                    "attributes": [
-                        {
-                            "name": "Дата начала отпуска",
-                            "type": "date",
-                            "options": {
-                                "alias": "$original_start_date"
-                            }
-                        },
-                        {
-                            "name": "Дата окончания отпуска",
-                            "type": "date",
-                            "options": {
-                                "alias": "$original_end_date"
-                            }
-                        },
-                        {
-                            "name": "Тип отсутствия",
-                            "type": "text"
-                        }
-                    ]
-                }
-            ],
-            "company_cancelable": true
-        },
-        {
-            "key": "step_1",
-            "state": {
-                "name": "Формирование заявления о переносе ранее запланированного отпуска"
-            },
-            "node_type": "middle",
-            "actions": [
-                {
-                    "type": "generate_document_from_template",
-                    "is_employee": true,
-                    "document_type": "Заявление на перенос ранее запланированного ежегодного отпуска",
-                    "attributes": [
-                        {
-                            "type": "date",
-                            "name": "Дата начала отпуска",
-                            "options": {
-                                "alias": "$original_start_date"
-                            }
-                        },
-                        {
-                            "type": "date",
-                            "name": "Дата окончания отпуска",
-                            "options": {
-                                "alias": "$original_end_date"
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "name": "Количество календарных дней",
-                            "options": {
-                                "expression": "vacation_days($original_start_date, $original_end_date)",
-                                "info_type": "original_vacation_days"
-                            }
-                        },
-                        {
-                            "name": "Тип отсутствия",
-                            "type": "text"
-                        },
-                        {
-                            "type": "date",
-                            "name": "Новая дата начала отпуска",
-                            "options": {
-                                "alias": "$newstart",
-                                "tooltip": {
-                                    "title": "Подсказка",
-                                    "description": "Вы можете указать только один период для переноса отпуска. Если вам необходимо разделить отпуск на несколько периодов, воспользуйтесь процессом «Заявление о переносе отпуска» несколько раз.",
-                                    "style": "disclaimer"
-                                }
-                            }
-                        },
-                        {
-                            "type": "date",
-                            "name": "Новая дата окончания отпуска",
-                            "options": {
-                                "alias": "$newend"
-                            }
-                        },
-                        {
-                            "type": "text",
-                            "name": "Количество календарных дней нового отпуска",
-                            "options": {
-                                "expression": "vacation_days($newstart, $newend)"
-                            }
-                        },
-                        {
-                            "name": "Перенос отпуска в связи с",
-                            "external_id": "1dd7895f-59ed-4786-9a12-34cc389281d4",
-                            "type": "choice",
-                            "options": {
-                                "choices": [
-                                    {
-                                        "label": "семейными обстоятельствами",
-                                        "value": "1"
-                                    },
-                                    {
-                                        "label": "болезнью",
-                                        "value": "2"
-                                    },
-                                    {
-                                        "label": "командировкой",
-                                        "value": "3"
-                                    }
-                                ]
-                            }
-                        }
-                    ],
-                    "attributes_meta": [
-                        {
-                            "type": "block",
-                            "title": "Перенос отпуска",
-                            "classes": [
-                                "half-width"
-                            ],
-                            "objects": [
-                                {
-                                    "type": "attribute",
-                                    "name": "Дата начала отпуска"
-                                },
-                                {
-                                    "type": "attribute",
-                                    "name": "Дата окончания отпуска"
-                                },
-                                {
-                                    "type": "attribute",
-                                    "name": "Количество календарных дней"
-                                },
-                                {
-                                    "type": "attribute",
-                                    "name": "Тип отсутствия"
-                                },
-                                {
-                                    "type": "attribute",
-                                    "name": "Перенос отпуска в связи с"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "document",
-                            "title": "Новая дата отпуска",
-                            "is_multiple": true,
-                            "classes": [
-                                "half-width"
-                            ],
-                            "objects": [
-                                {
-                                    "type": "block",
-                                    "title": "Блок",
-                                    "objects": [
-                                        {
-                                            "type": "attribute",
-                                            "name": "Новая дата начала отпуска"
-                                        },
-                                        {
-                                            "type": "attribute",
-                                            "name": "Новая дата окончания отпуска"
-                                        },
-                                        {
-                                            "type": "attribute",
-                                            "name": "Количество календарных дней нового отпуска"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ],
-                    "template": {
-                        "placeholders": [
-                            {
-                                "key": "FirstDateFrom",
-                                "attribute": "Дата начала отпуска"
-                            },
-                            {
-                                "key": "FirstDateTo",
-                                "attribute": "Дата окончания отпуска"
-                            },
-                            {
-                                "key": "DateFrom",
-                                "attribute": "Новая дата начала отпуска"
-                            },
-                            {
-                                "key": "DateTo",
-                                "attribute": "Новая дата окончания отпуска"
-                            },
-                            {
-                                "key": "Reason",
-                                "attribute": "Перенос отпуска в связи с"
-                            },
-                            {
-                                "key": "NewCount",
-                                "attribute": "Количество календарных дней нового отпуска"
-                            },
-                            {
-                                "key": "Type",
-                                "attribute": "Тип отсутствия"
-                            }
-                        ]
-                    }
-                }
-            ],
-            "deadline_settings": {
-                "settings": [
-                    {
-                        "reference": "node_active",
-                        "unit": "day",
-                        "term": 1,
-                        "round_days": true,
-                        "outcome": "cancel"
-                    }
-                ],
-                "mode": "min_date",
-                "reference": "",
-                "unit": "",
-                "term": 0
-            },
-            "employee_cancelable": true,
-            "company_cancelable": true
-        },
-        {
-            "key": "step_2",
-            "state": {
-                "name": "Подписание заявления о переносе ранее запланированного отпуска"
-            },
-            "node_type": "middle",
-            "actions": [
-                {
-                    "type": "sign",
-                    "is_employee": true,
-                    "document_type": "Заявление на перенос ранее запланированного ежегодного отпуска",
-                    "signature_type": "unep"
-                }
-            ],
-            "deadline_settings": {
-                "settings": [
-                    {
-                        "reference": "node_active",
-                        "unit": "day",
-                        "term": 1,
-                        "round_days": true,
-                        "outcome": "cancel"
-                    }
-                ],
-                "mode": "min_date",
-                "reference": "",
-                "unit": "",
-                "term": 0
-            },
-            "employee_cancelable": true,
-            "company_cancelable": true
-        },
-        {
-            "key": "step_3",
-            "state": {
-                "name": "Проверка подписи"
-            },
-            "node_type": "middle",
-            "actions": [
-                {
-                    "type": "system_validate_sign",
-                    "document_type": "Заявление на перенос ранее запланированного ежегодного отпуска"
-                }
-            ],
-            "company_cancelable": true
-        },
-        {
-            "key": "step_4_copy1",
-            "state": {
-                "name": "Согласование заявления о переносе отпуска"
-            },
-            "node_type": "middle",
-            "actions": [
-                {
-                    "type": "accept",
-                    "roles": [
-                        "Руководитель управленческий 1"
-                    ]
-                }
-            ],
-            "deadline_settings": {
-                "settings": [
-                    {
-                        "reference": "node_active",
-                        "unit": "day",
-                        "term": 3,
-                        "round_days": true,
-                        "outcome": "cancel"
-                    }
-                ],
-                "mode": "min_date",
-                "reference": "",
-                "unit": "",
-                "term": 0
-            },
-            "company_cancelable": true,
-            "manager_copies": {
-                "from": 1,
-                "count": 10,
-                "type": "operational",
-                "manager": true,
-                "assistant": false
+            {
+              "name": "Последний день отпуска без сохранения ЗП",
+              "external_id": "a0764782-09e4-4335-9e72-6346bcff1946",
+              "type": "date",
+              "required": true
             }
-        },
-        {
-            "key": "step_5_return",
-            "state": {
-                "name": "Проверка документов"
-            },
-            "node_type": "middle",
-            "actions": [
-                {
-                    "type": "accept",
-                    "roles": [
-                        "Отдел кадров"
-                    ]
-                },
-                {
-                    "type": "return",
-                    "roles": [
-                        "Отдел кадров"
-                    ]
-                }
-            ],
-            "deadline_settings": {
-                "mode": "min_date",
-                "reference": "",
-                "unit": "",
-                "term": 0
-            },
-            "company_cancelable": true,
-            "notify_integration": true
-        },
-        {
-            "key": "finish",
-            "state": {
-                "name": "Завершено"
-            },
-            "node_type": "end",
-            "actions": [
-                {
-                    "type": "system"
-                }
-            ],
-            "company_cancelable": true
+          ],
+          "template": {
+          
+            "placeholders": [
+              {
+                "key": "DateFrom",
+                "attribute": "Дата начала отпуска без сохранения ЗП"
+              },
+              {
+                "key": "DateTo",
+                "attribute": "Последний день отпуска без сохранения ЗП"
+              }
+            ]
+          }
         }
-    ],
-	
-    "transitions": [
+      ],
+      "employee_cancelable": true,
+      "company_cancelable": true
+    },
+    {
+      "key": "step_2",
+      "state": {
+        "name": "Подписание заявления о предоставлении отпуска без сохранения заработной платы",
+        "description": "Вы можете выбрать любое количество дней"
+      },
+      "node_type": "middle",
+      "actions": [
         {
-            "from": "step_5_return",
-            "to": "step_1",
-            "action_type": "return"
-        },
-        {
-            "from": "step_5_return",
-            "to": "finish",
-            "action_type": "accept"
-        },
-        {
-            "from": "step_4_copy1",
-            "to": "step_5_return",
-            "action_type": "accept"
-        },
-        {
-            "from": "step_3",
-            "to": "step_4_copy1",
-            "action_type": "system_validate_sign"
-        },
-        {
-            "from": "step_2",
-            "to": "step_3",
-            "action_type": "sign"
-        },
-        {
-            "from": "step_1",
-            "to": "step_2",
-            "action_type": "generate_document_from_template"
-        },
-        {
-            "from": "start",
-            "to": "step_1",
-            "action_type": "system"
+          "type": "sign",
+          "is_employee": true,
+          "document_type": "Заявление о предоставлении отпуска без сохранения заработной платы",
+          "signature_type": "pep"
         }
-    ],
-	 "group_statuses": [
+      ],
+      
+      "employee_cancelable": true,
+      "company_cancelable": true
+    },
+    {
+      "key": "step_3",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Заявление о предоставлении отпуска без сохранения заработной платы"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_4_copy1_copy1",
+      "state": {
+        "name": "Подтверждение отпуска без сохранения заработной платы"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Руководитель управленческий 1"
+          ]
+        }
+      ],
+      
+      "company_cancelable": true,
+      "manager_copies": {
+        "from": 1,
+        "count": 10,
+        "type": "operational",
+        "manager": true,
+        "assistant": false
+      }
+    },
+    {
+      "key": "step_5_return",
+      "state": {
+        "name": "Проверка заявления",
+        "description": "Вы можете выбрать любое количество дней"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Отдел кадров"
+          ]
+        },
+        {
+          "type": "return",
+          "roles": [
+            "Отдел кадров"
+          ]
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_6",
+      "state": {
+        "name": "Загрузка приказа о предоставлении отпуска работнику (без сохранения ЗП)"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "upload",
+          "roles": [
+            "Бухгалтерия"
+          ],
+          "document_type": "Приказ о предоставлении отпуска работнику (без сохранения ЗП)"
+        }
+      ],
+      
+      "company_cancelable": true
+      
+    },
+    {
+      "key": "step_7",
+      "state": {
+        "name": "Подписание приказа о предоставлении отпуска работнику (без сохранения ЗП)"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "sign",
+          "roles": [
+            "Директор"
+          ],
+          "document_type": "Приказ о предоставлении отпуска работнику (без сохранения ЗП)",
+          "signature_type": "pep"
+        }
+      ],
+      
+      "company_cancelable": true
+    },
+    {
+      "key": "step_8",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Приказ о предоставлении отпуска работнику (без сохранения ЗП)"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_9",
+      "state": {
+        "name": "Подписание приказа о предоставлении отпуска работнику (без сохранения ЗП)"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "sign",
+          "is_employee": true,
+          "document_type": "Приказ о предоставлении отпуска работнику (без сохранения ЗП)",
+          "signature_type": "pep"
+        }
+      ],
+      
+      "company_cancelable": true
+    },
+    {
+      "key": "step_10",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Приказ о предоставлении отпуска работнику (без сохранения ЗП)"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "end",
+      "state": {
+        "name": "Завершено"
+      },
+      "node_type": "end",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ],
+      "company_cancelable": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "start",
+      "to": "step_1",
+      "action_type": "system"
+    },
+    {
+      "from": "step_1",
+      "to": "step_2",
+      "action_type": "generate_document_from_template"
+    },
+    {
+      "from": "step_2",
+      "to": "step_3",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_3",
+      "to": "step_4_copy1_copy1",
+      "action_type": "system_validate_sign"
+    },
+    {
+      "from": "step_4_copy1_copy1",
+      "to": "step_5_return",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_5_return",
+      "to": "step_6",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_5_return",
+      "to": "step_1",
+      "action_type": "return"
+    },
+    {
+      "from": "step_6",
+      "to": "step_7",
+      "action_type": "upload"
+    },
+    {
+      "from": "step_7",
+      "to": "step_8",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_8",
+      "to": "step_9",
+      "action_type": "system_validate_sign"
+    },
+    {
+      "from": "step_9",
+      "to": "step_10",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_10",
+      "to": "end",
+      "action_type": "system_validate_sign"
+    }
+  ],
+  "group_statuses": [
+        {
+            "group_name": "Формирование заявки",
+            "keys": [
+                "step_1",
+                "step_2",
+                "step_3"
+            ]
+        },
         {
             "group_name": "Согласование",
             "keys": [
-                "step_4_copy1",
+                "step_4_copy1_copy1",
                 "step_5_return"
             ]
-            
         },
         {
-            "group_name": "Подписание",
-            "keys": [
-                "step_2",
-                "step_3"               
-            ]
-            
-        },
-        {
-            "group_name": "Завершено",
-            "key": "finish"
-            
+            "group_name": "Оформление",
+			"keys": [
+                "step_6",
+				"step_7",
+				"step_8",
+				"step_9",
+				"step_10"
+		    ]
         }
     ],
-    "validators": [
-        {
-            "type": "min_date",
-            "attributes": [
-                "Новая дата начала отпуска"
-            ],
-            "settings": {
-                "days_count": 9,
-                "working_days_only": false
-            }
-        },
-        {
-            "type": "min_date",
-            "attributes": [
-                "Дата начала отпуска"
-            ],
-            "settings": {
-                "days_count": 9,
-                "working_days_only": false
-            }
-        },
-        {
-            "type": "min_duration",
-            "attributes": [
-                "Дата начала отпуска",
-                "Дата окончания отпуска"
-            ],
-            "settings": {
-                "min_duration": 0,
-                "working_days_only": false,
-                "vacation_type": null
-            }
-        },
-        {
-            "type": "min_duration",
-            "attributes": [
-                "Новая дата начала отпуска",
-                "Новая дата окончания отпуска"
-            ],
-            "settings": {
-                "min_duration": 0,
-                "working_days_only": false,
-                "vacation_type": null
-            }
-        },
-        {
-            "type": "absence_days_check",
-            "attributes": [
-                "Новая дата начала отпуска",
-                "Новая дата окончания отпуска"
-            ],
-            "settings": {
-                "days_check": 14,
-                "absence_types": [
-                    "Основной",
-                    "Отпуск без оплаты в соотв. с частью 1 статьи 128 ТК РФ",
-                    "Ежегодный оплачиваемый отпуск"
-                ],
-                "working_days_only": false
-            }
-        },
-        {
-            "type": "compare_date_collection",
-            "attributes": [
-                "Дата начала отпуска",
-                "Дата окончания отпуска",
-                "Количество календарных дней",
-                "Новая дата начала отпуска",
-                "Новая дата окончания отпуска"
-            ],
-            "settings": {
-                "operation": "eq",
-                "working_days_only": false,
-                "holidays_exclusion": true
-            }
-        },
-        {
-            "type": "without_intersection_date_collection",
-            "attributes": [
-                "Новая дата начала отпуска",
-                "Новая дата окончания отпуска"
-            ]
-        },
-        {
-            "type": "absence_overlap",
-            "attributes": [
-                "Новая дата начала отпуска",
-                "Новая дата окончания отпуска"
-            ],
-            "settings": {
-                "rules": {
-                    "Командировка": "W",
-                    "Больничный": "E",
-                    "Учебный отпуск": "A"
-                },
-                "messages": {
-                    "W": "Внимание!",
-                    "E": "Запрещено!",
-                    "A": "Внимание2!"
-                }
-            }
-        }
-    ]
+  "validators": [
+    {
+      "type": "working_day",
+      "attributes": [
+        "Дата начала отпуска без сохранения ЗП",
+        "Последний день отпуска без сохранения ЗП"
+      ],
+      "settings": null
+    },
+    {
+      "type": "no_overlap",
+      "attributes": [
+        "Дата начала отпуска без сохранения ЗП",
+        "Последний день отпуска без сохранения ЗП"
+      ],
+      "settings": null
+    },
+    {
+      "type": "min_date",
+      "attributes": [
+        "Дата начала отпуска без сохранения ЗП"
+      ],
+      "settings": {
+        "days_count": 1,
+        "working_days_only": true
+      }
+    },
+    {
+      "type": "min_duration",
+      "attributes": [
+        "Дата начала отпуска без сохранения ЗП",
+        "Последний день отпуска без сохранения ЗП"
+      ],
+      "settings": {
+        "min_duration": 0,
+        "working_days_only": false,
+        "vacation_type": null
+      }
+    }
+  ]
 }
