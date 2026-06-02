@@ -1,0 +1,468 @@
+{
+    "name": "1.5 Другой день отдыха за работу в выходные и праздничные дни",
+    "group": "1.5 Другой день отдыха за работу в выходные и праздничные дни",
+    "tags": [
+        "отсутствие",
+        "отпуска"
+    ],
+    "options": {
+        "vacation_types": [
+            "Другой день отдыха"
+        ]
+    },
+    "participants": [
+        {
+            "role": "Отдел кадров",
+            "group": "Отдел кадров"
+        },
+        {
+            "role": "Руководитель управленческий 1"
+        },
+        {
+            "role": "Ассистент подразделения 1"
+        },
+        {
+            "role": "Руководитель управленческий 2"
+        },
+        {
+            "role": "Ассистент подразделения 2"
+        },
+        {
+            "role": "Руководитель управленческий 3"
+        },
+        {
+            "role": "Ассистент подразделения 3"
+        }
+    ],
+    "nodes": [
+        {
+            "key": "start",
+            "state": {
+                "name": "Старт"
+            },
+            "node_type": "begin",
+            "actions": [
+                {
+                    "type": "system",
+                    "is_employee": true
+                }
+            ],
+            "company_cancelable": true
+        },
+        {
+            "key": "step_1",
+            "state": {
+                "name": "Формирование заявления на другой день отдыха за работу в выходные и праздничные дни"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "generate_document_from_template",
+                    "is_employee": true,
+                    "document_type": "Заявление работника о предоставлении другого дня отдыха\/отгула",
+                    "attributes": [
+                        {
+                            "name": "Дата начала отпуска",
+                            "external_id": "b702174b-f9e1-4ec4-97a3-78642eb46e3a",
+                            "type": "date",
+                            "required": true,
+                            "options": {
+                                "info_type": {
+                                    "name": "vacation_days",
+                                    "show_vacation_types": true,
+                                    "show_negative": true
+                                },
+                                "alias": "$start"
+                            }
+                        },
+                        {
+                            "name": "Дата окончания отпуска",
+                            "external_id": "b6678658-e673-4782-9d0d-7eb15394d7e5",
+                            "type": "date",
+                            "required": true,
+                            "options": {
+                                "alias": "$end"
+                            }
+                        },
+                        {
+                            "name": "Количество календарных дней",
+                            "external_id": "b14325bb-508d-4fa9-b70e-35b36f48e3f8",
+                            "type": "text",
+                            "required": true,
+                            "options": {
+                                "expression": "days_between($start, $end, false)"
+                            }
+                        },
+                        {
+                            "name": "Вид отсутствия другой день отдыха\/отгул",
+                            "type": "choice",
+                            "required": false,
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Другой день отдыха за работу в выходные и праздничные дни",
+                                        "value": "1"
+                                    }
+                                ]
+                            },
+                            "permissions": {
+                                "not_visible": {
+                                    "roles": [],
+                                    "is_employee": true
+                                },
+                                "not_editable": {
+                                    "roles": [],
+                                    "is_employee": true
+                                }
+                            }
+                        },
+                        {
+                            "name": "Комментарий",
+                            "external_id": "2ddc62cd-fe40-4763-b9f0-52abfcc23b7b",
+                            "type": "textarea"
+                        }
+                    ],
+                    "template": {
+                        "file_id": 10968,
+                        "placeholders": [
+                            {
+                                "key": "DateFrom",
+                                "attribute": "Дата начала отпуска"
+                            },
+                            {
+                                "key": "DateTo",
+                                "attribute": "Дата окончания отпуска"
+                            },
+                            {
+                                "key": "Days",
+                                "attribute": "Количество календарных дней"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "employee_cancelable": true,
+            "company_cancelable": true
+        },
+        {
+            "key": "step_2",
+            "state": {
+                "name": "Подписание заявления о предоставлении другого дня отдыха\/отгула"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "sign",
+                    "is_employee": true,
+                    "document_type": "Заявление работника о предоставлении другого дня отдыха\/отгула",
+                    "signature_type": "pep"
+                }
+            ],
+            "employee_cancelable": true,
+            "company_cancelable": true
+        },
+        {
+            "key": "step_3",
+            "state": {
+                "name": "Проверка подписи"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "system_validate_sign",
+                    "document_type": "Заявление работника о предоставлении другого дня отдыха\/отгула"
+                }
+            ],
+            "company_cancelable": true
+        },
+        {
+            "key": "step_4_return",
+            "state": {
+                "name": "Согласование дополнительного отпуска"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "accept",
+                    "roles": [
+                        "Ассистент подразделения 1"
+                    ]
+                },
+                {
+                    "type": "return",
+                    "roles": [
+                        "Ассистент подразделения 1"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_5_return",
+            "state": {
+                "name": "Согласование дополнительного отпуска"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "accept",
+                    "roles": [
+                        "Руководитель управленческий 1"
+                    ]
+                },
+                {
+                    "type": "return",
+                    "roles": [
+                        "Руководитель управленческий 1"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_6_return",
+            "state": {
+                "name": "Согласование дополнительного отпуска"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "accept",
+                    "roles": [
+                        "Ассистент подразделения 2"
+                    ]
+                },
+                {
+                    "type": "return",
+                    "roles": [
+                        "Ассистент подразделения 2"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_7_return",
+            "state": {
+                "name": "Согласование дополнительного отпуска"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "accept",
+                    "roles": [
+                        "Руководитель управленческий 2"
+                    ]
+                },
+                {
+                    "type": "return",
+                    "roles": [
+                        "Руководитель управленческий 2"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_8_return",
+            "node_type": "middle",
+            "state": {
+                "name": "Согласование дополнительного отпуска"
+            },
+            "actions": [
+                {
+                    "roles": [
+                        "Ассистент подразделения 3"
+                    ],
+                    "type": "accept"
+                },
+                {
+                    "type": "return",
+                    "roles": [
+                        "Ассистент подразделения 3"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_9_return",
+            "node_type": "middle",
+            "state": {
+                "name": "Согласование дополнительного отпуска"
+            },
+            "actions": [
+                {
+                    "roles": [
+                        "Руководитель управленческий 3"
+                    ],
+                    "type": "accept"
+                },
+                {
+                    "type": "return",
+                    "roles": [
+                        "Руководитель управленческий 3"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_10",
+            "state": {
+                "name": "Загрузка распоряжения о предоставлении другого дня отдыха\/отгула"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "upload",
+                    "roles": [
+                        "Отдел кадров"
+                    ],
+                    "document_type": "Приказ о предоставлении другого дня отдыха\/отгула"
+                }
+            ],
+            "company_cancelable": true,
+            "notify_integration": true
+        },
+        {
+            "key": "finish",
+            "state": {
+                "name": "Завершено"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ],
+            "company_cancelable": true
+        }
+    ],
+    "transitions": [
+        {
+            "from": "start",
+            "to": "step_1",
+            "action_type": "system"
+        },
+        {
+            "from": "step_1",
+            "to": "step_2",
+            "action_type": "generate_document_from_template"
+        },
+        {
+            "from": "step_2",
+            "to": "step_3",
+            "action_type": "sign"
+        },
+        {
+            "from": "step_3",
+            "to": "step_4_return"
+        },
+        {
+            "from": "step_4_return",
+            "to": "step_5_return",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_4_return",
+            "to": "step_1",
+            "action_type": "return"
+        },
+        {
+            "from": "step_5_return",
+            "to": "step_6_return",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_5_return",
+            "to": "step_1",
+            "action_type": "return"
+        },
+        {
+            "from": "step_6_return",
+            "to": "step_7_return",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_6_return",
+            "to": "step_1",
+            "action_type": "return"
+        },
+        {
+            "from": "step_7_return",
+            "to": "step_8_return",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_7_return",
+            "to": "step_1",
+            "action_type": "return"
+        },
+        {
+            "from": "step_8_return",
+            "to": "step_9_return",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_8_return",
+            "to": "step_1",
+            "action_type": "return"
+        },
+        {
+            "from": "step_9_return",
+            "to": "step_10",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_9_return",
+            "to": "step_1",
+            "action_type": "return"
+        },
+        {
+            "from": "step_10",
+            "to": "finish"
+        }
+    ],
+    "validators": [
+        {
+            "type": "working_day",
+            "attributes": [
+                "Дата начала отпуска",
+                "Дата окончания отпуска"
+            ],
+            "settings": null
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "Дата начала отпуска"
+            ],
+            "settings": {
+                "days_count": -31,
+                "working_days_only": false
+            }
+        },
+        {
+            "type": "min_duration",
+            "attributes": [
+                "Дата начала отпуска",
+                "Дата окончания отпуска"
+            ],
+            "settings": {
+                "min_duration": 0,
+                "working_days_only": false,
+                "vacation_type": null
+            }
+        },
+        {
+            "type": "no_overlap",
+            "attributes": [
+                "Дата начала отпуска",
+                "Дата окончания отпуска"
+            ],
+            "settings": null
+        },
+        {
+            "type": "vacation_available",
+            "attributes": [
+                "Дата начала отпуска",
+                "Дата окончания отпуска"
+            ]
+        }
+    ]
+}

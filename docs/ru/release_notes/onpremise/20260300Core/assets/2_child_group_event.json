@@ -1,0 +1,436 @@
+{
+    "no_employee": true,
+    "name": "Групповая заявка на командировку подписание",
+    "group": "Групповая заявка на командировку подписание",
+    "nick": "BusinessTrip",
+    "options": {
+        "skip_missing_managers": true
+    },
+    "tags": [
+        "Командировки"
+    ],
+    "participants": [
+        {
+            "role": "Ответственный за командировки",
+            "group": "Ответственный за командировки"
+        },
+        {
+            "role": "Системный пользователь",
+            "group": "Системный пользователь"
+        },
+        {
+            "role": "Отдел кадров",
+            "group": "Отдел кадров"
+        }
+    ],
+    "nodes": [
+        {
+            "key": "start",
+            "state": {
+                "name": "Старт"
+            },
+            "node_type": "begin",
+            "actions": [
+                {
+                    "type": "system",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ],
+                    "attributes": [
+                        {
+                            "type": "employee",
+                            "name": "Руководитель группы в командировке 1",
+                            "required": true,
+                            "options": {
+                                "single_selection": true
+                            }
+                        },
+                        {
+                            "type": "employee",
+                            "name": "Перечень сотрудников",
+                            "required": true,
+                            "options": {
+                                "single_selection": true
+                            }
+                        },
+                        {
+                            "name": "Дата начала",
+                            "type": "date",
+                            "required": true,
+                            "options": {
+                                "alias": "$start"
+                            }
+                        },
+                        {
+                            "name": "Дата окончания",
+                            "type": "date",
+                            "required": true,
+                            "options": {
+                                "alias": "$end"
+                            }
+                        }
+                    ],
+                    "attributes_meta": [
+                        {
+                            "type": "block",
+                            "title": "Руководитель группы",
+                            "objects": [
+                                {
+                                    "type": "attribute",
+                                    "name": "Руководитель группы в командировке 1"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "document",
+                            "title": "Сотрудник",
+                            "is_multiple": true,
+                            "objects": [
+                                {
+                                    "type": "block",
+                                    "title": "Блок",
+                                    "objects": [
+                                        {
+                                            "type": "attribute",
+                                            "name": "Перечень сотрудников"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "block",
+                            "title": "Данные командировки",
+                            "is_multiple": true,
+                            "objects": [
+                                {
+                                    "type": "attribute",
+                                    "name": "Дата начала"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Дата окончания"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "system_linkedtrip_approveinfo",
+            "node_type": "middle",
+            "state": {
+                "name": "Ожидание согласования индивидуальных заявок на командировку"
+            },
+            "actions": [
+                {
+                    "type": "system_linkedtrip_approveinfo",
+                    "wait_for": {
+                        "events": "siblings",
+                        "event_type_name": "Индивидуальная заявка на командировку",
+                        "active_node": {
+                            "key": "system_linkedtrip_approveinfo_02",
+                            "status": "active"
+                        },
+                        "cancel_together": false
+                    }
+                }
+            ]
+        },
+        {
+            "key": "system_linkedtrip",
+            "node_type": "middle",
+            "state": {
+                "name": "Результат поиска связанных заявок"
+            },
+            "actions": [
+                {
+                    "type": "accept",
+                    "name": "Связанные заявки найдены",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                },
+                {
+                    "type": "decline",
+                    "name": "Связанные заявки не найдены",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_1",
+            "node_type": "middle",
+            "state": {
+                "name": "Не найдены дочерние индивидуальные заявки на командировку по сотрудникам",
+                "description": "Создайте дочерние индивидуальные заявки на командировку к групповой командировке вручную и нажмите кнопку Ожидание согласования по ним, или отмените групповую заявку"
+            },
+            "actions": [
+                {
+                    "type": "accept",
+                    "name": "Завершить групповую заявку на командировку",
+                    "roles": [
+                        "Ответственный за командировки"
+                    ]
+                },
+                {
+                    "type": "return",
+                    "name": "Ожидание согласования индивидуальных заявок",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "system_linkedtrip_attrinfo",
+            "node_type": "middle",
+            "state": {
+                "name": "Копирование данных связанных заявок на командировку"
+            },
+            "actions": [
+                {
+                    "type": "system_linkedtrip_attrinfo",
+                    "copy_attributes_from": {
+                        "events": "siblings",
+                        "event_type_name": "Индивидуальная заявка на командировку",
+                        "active_node": {
+                            "key": "system_linkedtrip_approveinfo_02",
+                            "status": "active"
+                        },
+                        "attributes": [
+                            {
+                                "type": "employee",
+                                "name": "Перечень сотрудников"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "key": "system_linkedtrip02",
+            "node_type": "middle",
+            "state": {
+                "name": "Результат копирования атрибутов связанных заявок"
+            },
+            "actions": [
+                {
+                    "type": "accept",
+                    "name": "Копирование успешно",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                },
+                {
+                    "type": "decline",
+                    "name": "Копирование не успешно",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_2",
+            "node_type": "middle",
+            "state": {
+                "name": "Не скопированы атрибуты дочерних индивидуальных заявок на командировку по сотрудникам",
+                "description": "Чтобы попробовать повторить копирование нажмите кнопку Повторить, или отмените групповую заявку"
+            },
+            "actions": [
+                {
+                    "type": "accept",
+                    "name": "Отменить групповую заявку на командировку",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                },
+                {
+                    "type": "return",
+                    "name": "Повторить копирование",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_3",
+            "node_type": "middle",
+            "state": {
+                "name": "Подписание группового заявления о направлении в командировку по РФ"
+            },
+            "actions": [
+                {
+                    "type": "accept",
+                    "name": "Согласовать командировку",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                },
+                {
+                    "type": "decline",
+                    "name": "Отклонить командировку",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_4",
+            "state": {
+                "name": "Групповое заявление о направлении в командировку по РФ подписано Заместителем Председателя Правления"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "accept",
+                    "name": "Уведомление о подписании",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ],
+                    "attributes": []
+                }
+            ],
+            "deadline_settings": {
+                "reference": "node_active",
+                "term": 1,
+                "unit": "minute",
+                "outcome": "skip"
+            }
+        },
+        {
+            "key": "end_3",
+            "state": {
+                "name": "Подписано"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ]
+        },
+        {
+            "key": "end_4",
+            "state": {
+                "name": "Отклонено"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ]
+        },
+        {
+            "key": "end_2",
+            "state": {
+                "name": "Отменено"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ]
+        },
+        {
+            "key": "end_1",
+            "state": {
+                "name": "Отменено"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ]
+        }
+    ],
+    "transitions": [
+        {
+            "from": "start",
+            "to": "system_linkedtrip_approveinfo"
+        },
+        {
+            "from": "system_linkedtrip_approveinfo",
+            "to": "system_linkedtrip"
+        },
+        {
+            "from": "system_linkedtrip",
+            "to": "system_linkedtrip_attrinfo",
+            "action_type": "accept"
+        },
+        {
+            "from": "system_linkedtrip",
+            "to": "step_1",
+            "action_type": "decline"
+        },
+        {
+            "from": "step_1",
+            "to": "system_linkedtrip_approveinfo",
+            "action_type": "return"
+        },
+        {
+            "from": "step_1",
+            "to": "end_1",
+            "action_type": "accept"
+        },
+        {
+            "from": "system_linkedtrip_attrinfo",
+            "to": "system_linkedtrip02"
+        },
+        {
+            "from": "system_linkedtrip02",
+            "to": "step_3",
+            "action_type": "accept"
+        },
+        {
+            "from": "system_linkedtrip02",
+            "to": "step_2",
+            "action_type": "decline"
+        },
+        {
+            "from": "step_2",
+            "to": "system_linkedtrip_attrinfo",
+            "action_type": "return"
+        },
+        {
+            "from": "step_2",
+            "to": "end_2",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_3",
+            "to": "step_4",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_3",
+            "to": "end_4",
+            "action_type": "decline"
+        },
+        {
+            "from": "step_4",
+            "to": "end_3",
+            "action_type": "accept"
+        }
+    ]
+}

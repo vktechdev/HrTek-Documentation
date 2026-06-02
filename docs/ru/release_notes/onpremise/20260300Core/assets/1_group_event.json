@@ -1,0 +1,1162 @@
+{
+    "no_employee": true,
+    "name": "Групповая заявка на командировку",
+    "group": "Групповая заявка на командировку",
+    "nick": "BusinessTrip",
+    "options": {
+        "skip_missing_managers": true,
+        "create_child_label": "Документы по командировке"
+    },
+    "tags": [
+        "Командировки"
+    ],
+    "participants": [
+        {
+            "role": "Ответственный за командировки",
+            "group": "Ответственный за командировки"
+        },
+        {
+            "role": "Отдел кадров",
+            "group": "Отдел кадров"
+        }
+    ],
+    "nodes": [
+        {
+            "key": "start",
+            "state": {
+                "name": "Старт"
+            },
+            "node_type": "begin",
+            "actions": [
+                {
+                    "type": "system",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "step_1",
+            "state": {
+                "name": "Передача данных о групповой командировке"
+            },
+            "custom_state": {
+                "name": "Передача данных о групповой командировке"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "accept",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ],
+                    "attributes": [
+                        {
+                            "type": "employee",
+                            "name": "Руководитель группы в командировке 1",
+                            "required": false,
+                            "options": {
+                                "single_selection": true
+                            }
+                        },
+                        {
+                            "type": "employee",
+                            "name": "Перечень сотрудников",
+                            "required": false,
+                            "options": {
+                                "single_selection": true
+                            }
+                        },
+                        {
+                            "type": "choice",
+                            "name": "Вид командировки",
+                            "required": false,
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Служебная командировка\/РФ",
+                                        "value": "Служебная командировка\/РФ",
+                                        "default": true
+                                    },
+                                    {
+                                        "label": "Повышение квалификации\/РФ",
+                                        "value": "Повышение квалификации\/РФ",
+                                        "default": false
+                                    },
+                                    {
+                                        "label": "Служебная командировка\/СП",
+                                        "value": "Служебная командировка\/СП",
+                                        "default": false
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Дата начала",
+                            "type": "date",
+                            "required": false,
+                            "options": {
+                                "alias": "$start"
+                            }
+                        },
+                        {
+                            "name": "Дата окончания",
+                            "type": "date",
+                            "required": false,
+                            "options": {
+                                "alias": "$end"
+                            }
+                        },
+                        {
+                            "name": "Количество дней",
+                            "type": "text",
+                            "options": {
+                                "expression": "days_between($start, $end, false)"
+                            }
+                        },
+                        {
+                            "type": "text_catalog",
+                            "name": "Организация плательщик:",
+                            "required": false,
+                            "options": {
+                                "catalog_name": "Организации плательщики"
+                            }
+                        },
+                        {
+                            "name": "№ СЗ в САД",
+                            "required": false,
+                            "type": "text",
+                            "options": {
+                                "placeholder": "XXXXXXXXXXXXXXXXX"
+                            }
+                        },
+                        {
+                            "name": "Дата СЗ в САД",
+                            "required": false,
+                            "type": "date"
+                        },
+                        {
+                            "name": "№ поручения в САД",
+                            "required": false,
+                            "type": "text",
+                            "options": {
+                                "placeholder": "XX-XXXXXXXXXXXXXX",
+                                "format": "99-99999999999999"
+                            }
+                        },
+                        {
+                            "name": "Дата поручения в САД",
+                            "required": false,
+                            "type": "date"
+                        },
+                        {
+                            "type": "choice",
+                            "name": "Утверждающий  в САД:",
+                            "required": false,
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Россеев Михаил Николаевич",
+                                        "value": "Россеев Михаил Николаевич",
+                                        "default": true
+                                    },
+                                    {
+                                        "label": "Маркелов Виталий Анатольевич",
+                                        "value": "Маркелов Виталий Анатольевич",
+                                        "default": false
+                                    },
+                                    {
+                                        "label": "Аксютин Олег Евгеньевичч",
+                                        "value": "Аксютин Олег Евгеньевич",
+                                        "default": false
+                                    },
+                                    {
+                                        "label": "Милютина Ирина Николаевна",
+                                        "value": "Милютина Ирина Николаевна",
+                                        "default": false
+                                    },
+                                    {
+                                        "label": "Миллер Алексей Борисович",
+                                        "value": "Миллер Алексей Борисович",
+                                        "default": false
+                                    },
+                                    {
+                                        "label": "Путин Михаил Евгеньевич",
+                                        "value": "Путин Михаил Евгеньевич",
+                                        "default": false
+                                    },
+                                    {
+                                        "label": "Хомяков Сергей Федорович",
+                                        "value": "Хомяков Сергей Федорович",
+                                        "default": false
+                                    },
+                                    {
+                                        "label": "Садыгов Фамил Камилович",
+                                        "value": "Садыгов Фамил Камилович",
+                                        "default": false
+                                    },
+                                    {
+                                        "label": "Илюхина Елена Анатольевна",
+                                        "value": "Илюхина Елена Анатольевна",
+                                        "default": false
+                                    },
+                                    {
+                                        "label": "Куприянов Сергей Владимирович",
+                                        "value": "Куприянов Сергей Владимирович",
+                                        "default": false
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Номер телефона",
+                            "required": false,
+                            "type": "text",
+                            "options": {
+                                "placeholder": "+7 (XXX)-XXX-XX-XX",
+                                "format": "+7 (999)-999-99-99"
+                            }
+                        },
+                        {
+                            "name": "Первая страна командирования",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "РОССИЯ",
+                                        "value": "РОССИЯ",
+                                        "default": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Первый пункт назначения",
+                            "required": false,
+                            "type": "text_catalog",
+                            "options": {
+                                "catalog_name": "ГАР Тест"
+                            }
+                        },
+                        {
+                            "name": "Первая принимающая организация",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "catalog_name": "Принимающие организации"
+                            }
+                        },
+                        {
+                            "name": "Первый пункт. Дата начала",
+                            "type": "date",
+                            "required": false
+                        },
+                        {
+                            "name": "Первый пункт. Дата окончания",
+                            "type": "date",
+                            "required": false
+                        },
+                        {
+                            "name": "Цель командировки в первом пункте",
+                            "type": "text_catalog",
+                            "options": {
+                                "catalog_name": "Цели командировок",
+                                "tooltip": {
+                                    "title": "Внимание!",
+                                    "description": "Необходимо выбрать цель второго уровня",
+                                    "style": "disclaimer",
+                                    "visible": false
+                                }
+                            },
+                            "required": false
+                        },
+                        {
+                            "name": "Описание цели в первом пункте",
+                            "type": "textarea",
+                            "required": false
+                        },
+                        {
+                            "name": "Нужно добавить второй пункт назначения?",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Нет",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "label": "Да",
+                                        "value": "2"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Вторая страна командирования",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Россия",
+                                        "value": "Россия",
+                                        "default": true
+                                    }
+                                ],
+                                "hide_when": {
+                                    "attribute": "Нужно добавить второй пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Второй пункт назначения",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "catalog_name": "ГАР Тест",
+                                "hide_when": {
+                                    "attribute": "Нужно добавить второй пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Второй пункт. Дата начала",
+                            "type": "date",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить второй пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Второй пункт. Дата окончания",
+                            "type": "date",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить второй пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Вторая принимающая организация",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить второй пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ]
+                                },
+                                "catalog_name": "Принимающие организации"
+                            }
+                        },
+                        {
+                            "name": "Цель командировки во втором пункте",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "catalog_name": "Цели командировок",
+                                "tooltip": {
+                                    "title": "Внимание!",
+                                    "description": "Необходимо выбрать цель второго уровня",
+                                    "style": "disclaimer",
+                                    "visible": false
+                                },
+                                "hide_when": {
+                                    "attribute": "Нужно добавить второй пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Описание цели во втором пункте",
+                            "type": "textarea",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить второй пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Нужно добавить третий пункт назначения?",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Нет",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "label": "Да",
+                                        "value": "2"
+                                    }
+                                ],
+                                "hide_when": {
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "attribute": "Нужно добавить второй пункт назначения?"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Третья страна командирования",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Россия",
+                                        "value": "Россия",
+                                        "default": true
+                                    }
+                                ],
+                                "hide_when": {
+                                    "attribute": "Нужно добавить третий пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Третий пункт назначения",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "catalog_name": "ГАР Тест",
+                                "hide_when": {
+                                    "attribute": "Нужно добавить третий пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Третий пункт. Дата начала",
+                            "type": "date",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить третий пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Третий пункт. Дата окончания",
+                            "type": "date",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить третий пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Третья принимающая организация",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить третий пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                },
+                                "catalog_name": "Принимающие организации"
+                            }
+                        },
+                        {
+                            "name": "Цель командировки в третьем пункте",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "catalog_name": "Цели командировок",
+                                "tooltip": {
+                                    "title": "Внимание!",
+                                    "description": "Необходимо выбрать цель второго уровня",
+                                    "style": "disclaimer",
+                                    "visible": false
+                                },
+                                "hide_when": {
+                                    "attribute": "Нужно добавить третий пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Описание цели в третьем пункте",
+                            "type": "textarea",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить третий пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Нужно добавить четвёртый пункт назначения?",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Нет",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "label": "Да",
+                                        "value": "2"
+                                    }
+                                ],
+                                "hide_when": {
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "attribute": "Нужно добавить третий пункт назначения?"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Четвертая страна командирования",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Россия",
+                                        "value": "Россия",
+                                        "default": true
+                                    }
+                                ],
+                                "hide_when": {
+                                    "attribute": "Нужно добавить четвёртый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Четвертый пункт назначения",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "catalog_name": "ГАР Тест",
+                                "hide_when": {
+                                    "attribute": "Нужно добавить четвёртый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Четвертый пункт. Дата начала",
+                            "required": false,
+                            "type": "date",
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить четвёртый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Четвертый пункт. Дата окончания",
+                            "type": "date",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить четвёртый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Четвертая принимающая организация",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить четвёртый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                },
+                                "catalog_name": "Принимающие организации"
+                            }
+                        },
+                        {
+                            "name": "Цель командировки в четвёртом пункте",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "catalog_name": "Цели командировок",
+                                "tooltip": {
+                                    "title": "Внимание!",
+                                    "description": "Необходимо выбрать цель второго уровня",
+                                    "style": "disclaimer",
+                                    "visible": false
+                                },
+                                "hide_when": {
+                                    "attribute": "Нужно добавить четвёртый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Описание цели в четвертом пункте",
+                            "type": "textarea",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить четвёртый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Нужно добавить пятый пункт назначения?",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Нет",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "label": "Да",
+                                        "value": "2"
+                                    }
+                                ],
+                                "hide_when": {
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "attribute": "Нужно добавить четвёртый пункт назначения?"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Пятая страна командирования",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Россия",
+                                        "value": "Россия",
+                                        "default": true
+                                    }
+                                ],
+                                "hide_when": {
+                                    "attribute": "Нужно добавить пятый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "Пятый пункт назначения",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "catalog_name": "ГАР Тест",
+                                "hide_when": {
+                                    "attribute": "Нужно добавить пятый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Пятый пункт. Дата начала",
+                            "type": "date",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить пятый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Пятый пункт. Дата окончания",
+                            "type": "date",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить пятый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Пятая принимающая организация",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить пятый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                },
+                                "catalog_name": "Принимающие организации"
+                            }
+                        },
+                        {
+                            "name": "Цель командировки в пятом пункте",
+                            "type": "text_catalog",
+                            "required": false,
+                            "options": {
+                                "catalog_name": "Цели командировок",
+                                "tooltip": {
+                                    "title": "Внимание!",
+                                    "description": "Необходимо выбрать цель второго уровня",
+                                    "style": "disclaimer",
+                                    "visible": false
+                                },
+                                "hide_when": {
+                                    "attribute": "Нужно добавить пятый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Описание цели в пятом пункте",
+                            "type": "textarea",
+                            "required": false,
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Нужно добавить пятый пункт назначения?",
+                                    "equal": [
+                                        "1"
+                                    ],
+                                    "unequal": null
+                                }
+                            }
+                        },
+                        {
+                            "name": "Документы, обосновывающие необходимость командировки:",
+                            "type": "multiple_file",
+                            "required": false
+                        },
+                        {
+                            "type": "textarea",
+                            "required": false,
+                            "name": "Приложение",
+                            "description": "Указать наименования приложенных документов",
+                            "options": {
+                                "tooltip": {
+                                    "title": "Внимание!",
+                                    "description": "В данной строке необходимо указать наименования приложенных документов или основание направления в командировку",
+                                    "style": "disclaimer",
+                                    "visible": false
+                                }
+                            }
+                        },
+                        {
+                            "name": "Примечание",
+                            "type": "textarea",
+                            "required": false,
+                            "options": {
+                                "tooltip": {
+                                    "description": "Пример: разрешен перелет через г. Москва. Далее по трассе…",
+                                    "style": "disclaimer",
+                                    "visible": false
+                                }
+                            }
+                        },
+                        {
+                            "name": "Дата",
+                            "type": "date",
+                            "required": false
+                        },
+                        {
+                            "name": "Номер",
+                            "required": false,
+                            "type": "text"
+                        },
+                        {
+                            "name": "Номер авансового отчета",
+                            "required": false,
+                            "type": "text"
+                        },
+                        {
+                            "name": "Организация",
+                            "required": false,
+                            "type": "text"
+                        }
+                    ],
+                    "attributes_meta": [
+                        {
+                            "type": "block",
+                            "title": "Руководитель группы",
+                            "objects": [
+                                {
+                                    "type": "attribute",
+                                    "name": "Руководитель группы в командировке 1"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "document",
+                            "title": "Перечень сотрудников",
+                            "is_multiple": true,
+                            "objects": [
+                                {
+                                    "type": "block",
+                                    "title": "Блок",
+                                    "objects": [
+                                        {
+                                            "type": "attribute",
+                                            "name": "Перечень сотрудников"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "block",
+                            "title": "Данные командировки",
+                            "objects": [
+                                {
+                                    "type": "attribute",
+                                    "name": "Дата"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Номер"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Номер авансового отчета"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Организация"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Вид командировки"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Дата начала"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Дата окончания"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Количество дней"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Вид командировки"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Организация плательщик:"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "№ СЗ в САД"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Дата СЗ в САД"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "№ поручения в САД"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Дата поручения в САД"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Утверждающий  в САД:"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Номер телефона"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Первая страна командирования"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Первый пункт назначения"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Первая принимающая организация"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Первый пункт. Дата начала"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Первый пункт. Дата окончания"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Цель командировки в первом пункте"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Описание цели в первом пункте"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Нужно добавить второй пункт назначения?"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Вторая страна командирования"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Второй пункт назначения"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Второй пункт. Дата начала"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Второй пункт. Дата окончания"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Вторая принимающая организация"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Цель командировки во втором пункте"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Описание цели во втором пункте"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Нужно добавить третий пункт назначения?"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Третья страна командирования"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Третий пункт назначения"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Третий пункт. Дата начала"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Третий пункт. Дата окончания"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Третья принимающая организация"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Цель командировки в третьем пункте"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Описание цели в третьем пункте"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Нужно добавить четвёртый пункт назначения?"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Четвертая страна командирования"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Четвертый пункт назначения"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Четвертый пункт. Дата начала"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Четвертый пункт. Дата окончания"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Четвертая принимающая организация"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Цель командировки в четвёртом пункте"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Описание цели в четвертом пункте"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Нужно добавить пятый пункт назначения?"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Пятая страна командирования"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Пятый пункт назначения"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Пятый пункт. Дата начала"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Пятый пункт. Дата окончания"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Пятая принимающая организация"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Цель командировки в пятом пункте"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Описание цели в пятом пункте"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Документы, обосновывающие необходимость командировки:"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Приложение"
+                                },
+                                {
+                                    "type": "attribute",
+                                    "name": "Примечание"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "employee_cancelable": true
+        },
+        {
+            "key": "step_2",
+            "state": {
+                "name": "Загрузка приказа на командировку"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "upload",
+                    "document_type": "Заявление на служебную командировку",
+                    "name": "ОК",
+                    "roles": [
+                        "Ответственный за командировки",
+                        "Отдел кадров"
+                    ]
+                }
+            ],
+            "notify_integration": true
+        },
+        {
+            "key": "end",
+            "state": {
+                "name": "Создана"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ]
+        }
+    ]
+}

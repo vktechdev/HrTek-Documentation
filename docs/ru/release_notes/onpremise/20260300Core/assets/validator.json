@@ -1,0 +1,147 @@
+{
+  "name": "Опция не учитывать праздники в валидаторах",
+  "group": "Опция не учитывать праздники в валидаторах",
+  "participants": [
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров"
+    }
+  ],
+  "validators": [
+    {
+      "type": "min_date",
+      "attributes": [
+        "Дата начала отпуска"
+      ],
+      "settings": {
+        "days_count": 1,
+        "working_days_only": false
+      }
+    },
+    {
+      "type": "min_duration",
+      "attributes": [
+        "Дата начала отпуска",
+        "Дата окончания отпуска"
+      ],
+      "settings": {
+        "min_duration": 7,
+        "working_days_only": false,
+        "ignore_holidays": true
+      }
+    },
+    {
+      "type": "max_duration",
+      "attributes": [
+        "Дата начала отпуска",
+        "Дата окончания отпуска"
+      ],
+      "settings": {
+        "max_duration": 7,
+        "working_days_only": false,
+        "ignore_holidays": true
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "key": "start",
+      "state": {
+        "name": "Старт"
+      },
+      "node_type": "begin",
+      "actions": [
+        {
+          "roles": [],
+          "type": "system",
+          "is_employee": true
+        }
+      ]
+    },
+    {
+      "key": "step_1",
+      "state": {
+        "name": "Заполните данные"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [],
+          "type": "accept",
+          "attributes": [
+            {
+              "type": "date",
+              "name": "Дата начала отпуска",
+              "required": true,
+              "options": {
+                "info_type": {
+                  "name": "vacation_days"
+                }
+              }
+            },
+            {
+              "type": "date",
+              "name": "Дата окончания отпуска",
+              "required": true
+            }
+          ],
+          "is_employee": true
+        }
+      ],
+      "employee_cancelable": true
+    },
+    {
+      "key": "step_2_return",
+      "node_type": "middle",
+      "state": {
+        "name": "Проверка заявки"
+      },
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Отдел кадров"
+          ]
+        },
+        {
+          "type": "return",
+          "roles": [
+            "Отдел кадров"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "end",
+      "state": {
+        "name": "Завершено"
+      },
+      "node_type": "end",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "from": "start",
+      "to": "step_1"
+    },
+    {
+      "from": "step_1",
+      "to": "step_2_return"
+    },
+    {
+      "from": "step_2_return",
+      "to": "end",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_2_return",
+      "to": "step_1",
+      "action_type": "return"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "batch_enabled": true,
+  "name": "Табель учета рабочего времени_без сотрудника_упр орга",
+  "group": "Табель учета рабочего времени_без сотрудника_упр орга",
+  "no_employee": true,
+  "participants": [
+    {
+      "role": "Руководитель управленческий 1"
+    },
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров"
+    }
+  ],
+  "nodes": [
+    {
+      "key": "start",
+      "state": {
+        "name": "Старт"
+      },
+      "node_type": "begin",
+      "action": {
+        "type": "system",
+        "roles": [
+          "Отдел кадров"
+        ]
+      }
+    },
+    {
+      "key": "step_1.1",
+      "state": {
+        "name": "Загрузка"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [
+            "Отдел кадров"
+          ],
+          "attributes": [
+            {
+              "name": "Структурное подразделение в табеле",
+              "type": "unit",
+              "external_id": "617fdea2-dba1-4db0-9296-c8413a20c1e6"
+            }
+          ],
+          "type": "upload",
+          "document_type": "Документ"
+        }
+      ]
+    },
+    {
+      "key": "step_1",
+      "state": {
+        "name": "Согласование"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [
+            "Руководитель управленческий 1"
+          ],
+          "type": "accept"
+        }
+      ]
+    },
+    {
+      "key": "completed",
+      "state": {
+        "name": "Финиш"
+      },
+      "node_type": "end",
+      "action": {
+        "type": "system"
+      }
+    }
+  ]
+}

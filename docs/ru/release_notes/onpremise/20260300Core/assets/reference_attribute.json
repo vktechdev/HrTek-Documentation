@@ -1,0 +1,93 @@
+{
+  "name": "Пример атрибута-справочника без пополнения справочника",
+  "group": "Пример атрибута-справочника без пополнения справочника",
+  "participants": [
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров"
+    }
+  ],
+  "validators": [],
+  "nodes": [
+    {
+      "key": "start",
+      "state": {
+        "name": "Старт"
+      },
+      "node_type": "begin",
+      "actions": [
+        {
+          "roles": [],
+          "is_employee": true,
+          "type": "system"
+        }
+      ]
+    },
+    {
+      "key": "step_1",
+      "state": {
+        "name": "Формирование заявки"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [],
+          "attributes": [
+            {
+              "type": "text_catalog",
+              "name": "Принимающая организация",
+              "options": {
+                "catalog_name": "Принимающие организации",
+                "catalog_no_save_value": true
+              },
+              "required": true
+            }
+          ],
+          "type": "accept",
+          "is_employee": true
+        }
+      ]
+    },
+    {
+      "key": "step_2",
+      "state": {
+        "name": "Проверка заявки"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Отдел кадров"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "completed",
+      "state": {
+        "name": "Завершено"
+      },
+      "node_type": "end",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "from": "start",
+      "to": "step_1"
+    },
+    {
+      "from": "step_1",
+      "to": "step_2"
+    },
+    {
+      "from": "step_2",
+      "to": "completed"
+    }
+  ]
+}

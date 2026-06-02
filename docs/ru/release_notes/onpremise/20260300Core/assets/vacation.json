@@ -1,0 +1,508 @@
+{
+  "name": "Ежегодный оплачиваемый отпуск_с отсутствиями",
+  "group": "Ежегодный оплачиваемый отпуск_с отсутствиями",
+  "tags": [
+    "отсутствие",
+    "Отпуска",
+    "Оформить отпуск"
+  ],
+  "participants": [
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров"
+    },
+    {
+      "role": "Руководитель отдела кадров",
+      "group": "Руководитель отдела кадров"
+    },
+    {
+      "role": "Руководитель управленческий 1"
+    },
+    {
+      "role": "Руководитель управленческий 2"
+    },
+    {
+      "role": "Руководитель управленческий 3"
+    },
+    {
+      "role": "Руководитель управленческий 4"
+    },
+    {
+      "role": "Руководитель управленческий 5"
+    },
+    {
+      "role": "Руководитель управленческий 6"
+    },
+    {
+      "role": "Руководитель управленческий 7"
+    },
+    {
+      "role": "Руководитель управленческий 8"
+    },
+    {
+      "role": "Руководитель управленческий 9"
+    },
+    {
+      "role": "Руководитель управленческий 10"
+    }
+  ],
+  "nodes": [
+    {
+      "key": "start",
+      "state": {
+        "name": "Старт"
+      },
+      "node_type": "begin",
+      "actions": [
+        {
+          "type": "system",
+          "is_employee": true
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_1",
+      "state": {
+        "name": "Формирование заявления о предоставлении отпуска"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "generate_document_from_template",
+          "is_employee": true,
+          "document_type": "Заявление о предоставлении ежегодного оплачиваемого отпуска (не по графику)",
+          "attributes": [
+            {
+              "name": "Дата начала отпуска",
+              "external_id": "b702174b-f9e1-4ec4-97a3-78642eb46e3a",
+              "type": "date",
+              "required": true,
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска",
+              "external_id": "b6678658-e673-4782-9d0d-7eb15394d7e5",
+              "type": "date",
+              "required": true
+            },
+            {
+              "name": "Количество календарных дней",
+              "external_id": "b14325bb-508d-4fa9-b70e-35b36f48e3f8",
+              "type": "text"
+            },
+            {
+              "name": "Тип отпуска",
+              "external_id": "a71a2970-f04c-4a26-a3f9-222f2c45d727",
+              "type": "text"
+            }
+          ],
+          "template": {
+            "file_id": 6128,
+            "placeholders": [
+              {
+                "key": "DateFrom",
+                "attribute": "Дата начала отпуска"
+              },
+              {
+                "key": "DateTo",
+                "attribute": "Дата окончания отпуска"
+              }
+            ]
+          }
+        }
+      ],
+      "employee_cancelable": true,
+      "company_cancelable": true,
+      "show_calendar": true
+    },
+    {
+      "key": "step_2",
+      "state": {
+        "name": "Подписание заявления о предоставлении отпуска"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "sign",
+          "is_employee": true,
+          "document_type": "Заявление о предоставлении ежегодного оплачиваемого отпуска (не по графику)",
+          "signature_type": "pep"
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -14,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "employee_cancelable": true,
+      "company_cancelable": true
+    },
+    {
+      "key": "step_3",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Заявление о предоставлении ежегодного оплачиваемого отпуска (не по графику)"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_4_copy1",
+      "state": {
+        "name": "Подтверждение ежегодного оплачиваемого отпуска (не по графику)"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Руководитель управленческий 1"
+          ]
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -12,
+            "attribute": "Дата начала отпуска",
+            "outcome": "skip"
+          }
+        ],
+        "outcome": "skip",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true,
+      "manager_copies": {
+        "from": 1,
+        "count": 10,
+        "type": "operational",
+        "manager": true,
+        "assistant": false
+      }
+    },
+    {
+      "key": "step_5_return",
+      "state": {
+        "name": "Проверка документов"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Отдел кадров"
+          ]
+        },
+        {
+          "type": "return",
+          "roles": [
+            "Отдел кадров"
+          ]
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -4,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "step_6",
+      "state": {
+        "name": "Загрузка приказа о предоставлении отпуска работнику"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "upload",
+          "roles": [
+            "Отдел кадров"
+          ],
+          "document_type": "Приказ о предоставлении отпуска работнику"
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -4,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true,
+      "notify_integration": true
+    },
+    {
+      "key": "step_7",
+      "state": {
+        "name": "Подписание приказа о предоставлении отпуска работнику"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "sign",
+          "roles": [
+            "Руководитель отдела кадров"
+          ],
+          "document_type": "Приказ о предоставлении отпуска работнику",
+          "signature_type": "pep"
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -3,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "step_8",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Приказ о предоставлении отпуска работнику"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_9",
+      "state": {
+        "name": "Подписание приказа о предоставлении отпуска работнику"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "sign",
+          "is_employee": true,
+          "document_type": "Приказ о предоставлении отпуска работнику",
+          "signature_type": "pep"
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -1,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "step_10",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Приказ о предоставлении отпуска работнику"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_11",
+      "state": {
+        "name": "Проверка документов"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Отдел кадров"
+          ]
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "finish",
+      "state": {
+        "name": "Завершено"
+      },
+      "node_type": "end",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ],
+      "company_cancelable": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "start",
+      "to": "step_1",
+      "action_type": "system"
+    },
+    {
+      "from": "step_1",
+      "to": "step_2",
+      "action_type": "generate_document_from_template"
+    },
+    {
+      "from": "step_2",
+      "to": "step_3",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_3",
+      "to": "step_4_copy1",
+      "action_type": "system_validate_sign"
+    },
+    {
+      "from": "step_4_copy1",
+      "to": "step_5_return",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_5_return",
+      "to": "step_6",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_6",
+      "to": "step_7",
+      "action_type": "upload"
+    },
+    {
+      "from": "step_7",
+      "to": "step_8",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_8",
+      "to": "step_9",
+      "action_type": "system_validate_sign"
+    },
+    {
+      "from": "step_9",
+      "to": "step_10",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_10",
+      "to": "step_11",
+      "action_type": "system_validate_sign"
+    },
+    {
+      "from": "step_11",
+      "to": "finish",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_5_return",
+      "to": "step_1",
+      "action_type": "return"
+    }
+  ],
+  "validators": [
+    {
+      "type": "working_day",
+      "attributes": [
+        "Дата начала отпуска",
+        "Дата окончания отпуска"
+      ],
+      "settings": null
+    },
+    {
+      "type": "min_date",
+      "attributes": [
+        "Дата начала отпуска"
+      ],
+      "settings": {
+        "days_count": 14,
+        "working_days_only": false
+      }
+    },
+    {
+      "type": "min_duration",
+      "attributes": [
+        "Дата начала отпуска",
+        "Дата окончания отпуска"
+      ],
+      "settings": {
+        "min_duration": 0,
+        "working_days_only": false,
+        "vacation_type": null
+      }
+    },
+    {
+      "type": "no_overlap",
+      "attributes": [
+        "Дата начала отпуска",
+        "Дата окончания отпуска"
+      ],
+      "settings": null
+    }
+  ]
+}
