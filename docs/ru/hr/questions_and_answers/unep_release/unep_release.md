@@ -4,44 +4,57 @@
 
 ## Примеры ошибок для сотрудника
 
-Код ошибки: Unknown / UnknownConfirmationError  
+1. Код ошибки: Unknown / UnknownConfirmationError  
 Произошла неизвестная ошибка / Произошла неизвестная ошибка подтверждения
 
 ![](./assets/unep_error.png)
 
 <br>
 
-Код ошибки: UserNotFoundInEsia
+2. Код ошибки: UserNotFoundInEsia  
 Пользователь с подтвержденной учетной записью не найден
 
 ![](./assets/unep_error1.png)
 
 <br>
 
-Код ошибки: ConfirmationRejected
+3. Код ошибки: ConfirmationRejected  
 Пользователь отклонил запрос на подтверждение
 
 ![](./assets/unep_error3.png)
 
-Код ошибки: ConfirmationTimeout
+<br>
+
+4. Код ошибки: ConfirmationTimeout  
 Время на подтверждение личности истекло
 
 ![](./assets/unep_error4.png)
 
 
-
 ## Примеры ошибок для представителей компании
 
-Код ошибки: Unknown / UnknownConfirmationError 
+1. Код ошибки: Unknown / UnknownConfirmationError  
 Произошла неизвестная ошибка / Произошла неизвестная ошибка подтверждения  
 
 ![](./assets/unep_error2.png)  
 
 <br>
 
-Код ошибки: UserNotFoundInEsia
+2. Код ошибки: UserNotFoundInEsia  
 Пользователь с подтвержденной учетной записью не найден
 
 ![](./assets/unep_error5.png)  
 
+<br>
 
+3. Код ошибки: ConfirmationRejected  
+Пользователь отклонил запрос на подтверждение
+
+![](./assets/unep_error6.png)  
+
+<br>
+
+4. Код ошибки: ConfirmationTimeout  
+Время на подтверждение личности истекло
+
+![](./assets/unep_error7.png)  
