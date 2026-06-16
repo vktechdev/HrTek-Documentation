@@ -9,21 +9,18 @@
 
 ![](./assets/unep_error.png)
 
-<br>
 
 2. Код ошибки: UserNotFoundInEsia  
 Пользователь с подтвержденной учетной записью не найден
 
 ![](./assets/unep_error1.png)
 
-<br>
 
 3. Код ошибки: ConfirmationRejected  
 Пользователь отклонил запрос на подтверждение
 
 ![](./assets/unep_error3.png)
 
-<br>
 
 4. Код ошибки: ConfirmationTimeout  
 Время на подтверждение личности истекло
@@ -38,21 +35,18 @@
 
 ![](./assets/unep_error2.png)  
 
-<br>
 
 2. Код ошибки: UserNotFoundInEsia  
 Пользователь с подтвержденной учетной записью не найден
 
 ![](./assets/unep_error5.png)  
 
-<br>
 
 3. Код ошибки: ConfirmationRejected  
 Пользователь отклонил запрос на подтверждение
 
 ![](./assets/unep_error6.png)  
 
-<br>
 
 4. Код ошибки: ConfirmationTimeout  
 Время на подтверждение личности истекло
