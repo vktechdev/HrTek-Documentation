@@ -1,0 +1,100 @@
+{
+  "name": "Внесение данных о банковских картах",
+  "group": "Внесение данных о банковских картах",
+  "participants": [
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров"
+    }
+  ],
+  "validators": [
+    {
+      "type": "luhn_algorithm",
+      "attributes": [
+        "Номер банковской карты"
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "state": {
+        "name": "Старт"
+      },
+      "node_type": "begin",
+      "actions": [
+        {
+          "roles": [],
+          "type": "system",
+          "is_employee": true
+        }
+      ]
+    },
+    {
+      "state": {
+        "name": "Заполнение"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [],
+          "attributes": [
+            {
+              "type": "text",
+              "name": "БИК банка",
+              "options": {
+                "placeholder": "XXXXXXXXX",
+                "format": "999999999"
+              }
+            },
+            {
+              "type": "text",
+              "name": "Наименование банка"
+            },
+            {
+              "type": "text",
+              "name": "Номер карты",
+              "required": true,
+              "options": {
+                "max_length": 16,
+                "min_length": 16
+              }
+            },
+            {
+              "type": "text",
+              "name": "Срок действия карты",
+              "required": true
+            }
+          ],
+          "type": "accept",
+          "is_employee": true
+        }
+      ],
+      "employee_cancelable": true
+    },
+    {
+      "node_type": "middle",
+      "state": {
+        "name": "Проверка данных"
+      },
+      "actions": [
+        {
+          "roles": [
+            "Отдел кадров"
+          ],
+          "type": "accept"
+        }
+      ]
+    },
+    {
+      "state": {
+        "name": "Завершено"
+      },
+      "node_type": "end",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ]
+    }
+  ]
+}
