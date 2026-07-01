@@ -88,6 +88,46 @@
 <tr><td>Юридическое подразделение на 7 уровней вверх</td><td>{{ .Employee.LegalUnits.Up7 }}</td></tr>
 <tr><td>Юридическое подразделение на 8 уровней вверх</td><td>{{ .Employee.LegalUnits.Up8 }}</td></tr>
 <tr><td>Юридическое подразделение на 9 уровней вверх</td><td>{{ .Employee.LegalUnits.Up9 }}</td></tr>
+<tr><td>Управленческое подразделение руководителя работника</td><td>{{ .Employee.Manager.OperationalUnit }}</td></tr>
+<tr><td>Управленческое подразделение руководителя работника на 1 уровень вверх</td><td>{{ .Employee.Manager.OperationalUnits.Up1 }}</td></tr>
+<tr><td>Управленческое подразделение руководителя работника на 2 уровня вверх</td><td>{{ .Employee.Manager.OperationalUnits.Up2 }}</td></tr>
+<tr><td>Управленческое подразделение руководителя работника на 3 уровня вверх</td><td>{{ .Employee.Manager.OperationalUnits.Up3 }}</td></tr>
+<tr><td>Управленческое подразделение руководителя работника на 4 уровня вверх</td><td>{{ .Employee.Manager.OperationalUnits.Up4 }}</td></tr>
+<tr><td>Управленческое подразделение руководителя работника на 5 уровней вверх</td><td>{{ .Employee.Manager.OperationalUnits.Up5 }}</td></tr>
+<tr><td>Управленческое подразделение руководителя работника на 6 уровней вверх</td><td>{{ .Employee.Manager.OperationalUnits.Up6 }}</td></tr>
+<tr><td>Управленческое подразделение руководителя работника на 7 уровней вверх</td><td>{{ .Employee.Manager.OperationalUnits.Up7 }}</td></tr>
+<tr><td>Управленческое подразделение руководителя работника на 8 уровней вверх</td><td>{{ .Employee.Manager.OperationalUnits.Up8 }}</td></tr>
+<tr><td>Управленческое подразделение руководителя работника на 9 уровней вверх</td><td>{{ .Employee.Manager.OperationalUnits.Up9 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя работника</td><td>{{ .Employee.Manager.LegalUnit }}</td></tr>
+<tr><td>Юридическое подразделение руководителя работника на 1 уровень вверх</td><td>{{ .Employee.Manager.LegalUnits.Up1 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя работника на 2 уровня вверх</td><td>{{ .Employee.Manager.LegalUnits.Up2 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя работника на 3 уровня вверх</td><td>{{ .Employee.Manager.LegalUnits.Up3 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя работника на 4 уровня вверх</td><td>{{ .Employee.Manager.LegalUnits.Up4 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя работника на 5 уровней вверх</td><td>{{ .Employee.Manager.LegalUnits.Up5 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя работника на 6 уровней вверх</td><td>{{ .Employee.Manager.LegalUnits.Up6 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя работника на 7 уровней вверх</td><td>{{ .Employee.Manager.LegalUnits.Up7 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя работника на 8 уровней вверх</td><td>{{ .Employee.Manager.LegalUnits.Up8 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя работника на 9 уровней вверх</td><td>{{ .Employee.Manager.LegalUnits.Up9 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя (по юр. структуре)</td><td>{{ .Employee.LegalManager.LegalUnit }}</td></tr>
+<tr><td>Юридическое подразделение руководителя (по юр. структуре) на 1 уровень вверх</td><td>{{ .Employee.LegalManager.LegalUnits.Up1 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя (по юр. структуре) на 2 уровня вверх</td><td>{{ .Employee.LegalManager.LegalUnits.Up2 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя (по юр. структуре) на 3 уровня вверх</td><td>{{ .Employee.LegalManager.LegalUnits.Up3 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя (по юр. структуре) на 4 уровня вверх</td><td>{{ .Employee.LegalManager.LegalUnits.Up4 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя (по юр. структуре) на 5 уровней вверх</td><td>{{ .Employee.LegalManager.LegalUnits.Up5 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя (по юр. структуре) на 6 уровней вверх</td><td>{{ .Employee.LegalManager.LegalUnits.Up6 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя (по юр. структуре) на 7 уровней вверх</td><td>{{ .Employee.LegalManager.LegalUnits.Up7 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя (по юр. структуре) на 8 уровней вверх</td><td>{{ .Employee.LegalManager.LegalUnits.Up8 }}</td></tr>
+<tr><td>Юридическое подразделение руководителя (по юр. структуре) на 9 уровней вверх</td><td>{{ .Employee.LegalManager.LegalUnits.Up9 }}</td></tr>
+<tr><td>Юридическое подразделение управленческого руководителя</td><td>{{ .Employee.OperationalManager.LegalUnit }}</td></tr>
+<tr><td>Юридическое подразделение управленческого руководителя на 1 уровень вверх</td><td>{{ .Employee.OperationalManager.LegalUnits.Up1 }}</td></tr>
+<tr><td>Юридическое подразделение управленческого руководителя на 2 уровня вверх</td><td>{{ .Employee.OperationalManager.LegalUnits.Up2 }}</td></tr>
+<tr><td>Юридическое подразделение управленческого руководителя на 3 уровня вверх</td><td>{{ .Employee.OperationalManager.LegalUnits.Up3 }}</td></tr>
+<tr><td>Юридическое подразделение управленческого руководителя на 4 уровня вверх</td><td>{{ .Employee.OperationalManager.LegalUnits.Up4 }}</td></tr>
+<tr><td>Юридическое подразделение управленческого руководителя на 5 уровней вверх</td><td>{{ .Employee.OperationalManager.LegalUnits.Up5 }}</td></tr>
+<tr><td>Юридическое подразделение управленческого руководителя на 6 уровней вверх</td><td>{{ .Employee.OperationalManager.LegalUnits.Up6 }}</td></tr>
+<tr><td>Юридическое подразделение управленческого руководителя на 7 уровней вверх</td><td>{{ .Employee.OperationalManager.LegalUnits.Up7 }}</td></tr>
+<tr><td>Юридическое подразделение управленческого руководителя на 8 уровней вверх</td><td>{{ .Employee.OperationalManager.LegalUnits.Up8 }}</td></tr>
+<tr><td>Юридическое подразделение управленческого руководителя на 9 уровней вверх</td><td>{{ .Employee.OperationalManager.LegalUnits.Up9 }}</td></tr>
 <tr><td>Название компании</td><td>{{ .Company.Name }}</td><td rowspan="13">данные компании</td></tr>
 <tr><td>ФИО руководителя компании</td><td>{{ .Company.LegalInfo.CeoFio }}</td></tr>
 <tr><td>ФИО руководителя компании (родительный)</td><td>{{ .Company.LegalInfo.CeoFioCases.Genitive }}</td></tr>
@@ -107,6 +147,8 @@
 <tr><td>ФИО инициатора заявки (винительный)</td><td>{{ .Initiator.FioCases.Accusative }}</td></tr>
 <tr><td>ФИО инициатора заявки (творительный)</td><td>{{ .Initiator.FioCases.Creative }}</td></tr>
 <tr><td>ФИО инициатора заявки (предложный)</td><td>{{ .Initiator.FioCases.Prepositional }}</td></tr>
+<tr><td>Дата документа</td><td>{{ .Document.Date }}</td><td rowspan="6">данные документа</td></tr>
+<tr><td>Номер документа</td><td>{{ .Document.Number }}</td></tr>
 </table>
 
 ![1word.png](./assets/32.png)
@@ -131,3 +173,20 @@
 - поля для заполнения сотрудником или для автозаполнения системой должны быть строго в двойных фигурных скобках, как указано в подсказках. Например, вы можете добавить в шапку заявления ФИО руководителя {{ .Company.LegalInfo.CeoFio }} и должность руководителя {{ .Company.LegalInfo.CeoPosition }}, эти данные будут заполняться автоматически;
 - текст заявления вы можете менять на своё усмотрение, например, добавлять ссылки на законы, нормативные документы, удалять ненужные формулировки и др.
 3. Сохранить изменения в файле шаблона и загрузить его в сервис.
+
+
+## **Документ с подразделениями без наименования организации («корневого» подразделения)**
+
+В документах, которые сформированы из шаблона, отображаются подразделения без наименования организации или «корневого» подразделения.  
+
+При добавлении первого подразделения в управленческую структуру, Администратор указывает наименование «корневого» подразделения. Подробнее в статье [Создание и редактирование подразделений](/ru/admin_actions/management_structure/create_edit_division).   
+
+При использовании полей для шаблона (плейсхолдеров) с окончанием ".UpN" система исключает наименование организации или «корневого» подразделения в документах, где указаны дочерние подразделения.  
+
+Используется при формировании значений для нескольких уровней вверх в следующих плейсхолдерах:
+* юридическое подразделение сотрудника {{ .Employee.LegalUnits.Up1 }} - {{ .Employee.LegalUnits.Up9 }}   
+* юридическое подразделение непосредственного руководителя {{ .Employee.Manager.LegalUnits.Up1 }} - {{ .Employee.Manager.LegalUnits.Up9 }}  
+* юридическое подразделение юридического руководителя {{ .Employee.LegalManager.LegalUnits.Up1 }} - {{ .Employee.LegalManager.LegalUnits.Up9 }}  
+* юридическое подразделение управленческого руководителя {{ .Employee.OperationalManager.LegalUnits.Up1 }} - {{ .Employee.OperationalManager.LegalUnits.Up9 }}  
+* управленческое подразделение сотрудника {{ .Employee.OperationalUnits.Up1 }} - {{ .Employee.OperationalUnits.Up9 }}  
+* управленческое подразделение непосредственного руководителя {{ .Employee.Manager.OperationalUnits.Up1 }} - {{ .Employee.Manager.OperationalUnits.Up9 }}
