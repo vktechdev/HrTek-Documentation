@@ -1,0 +1,113 @@
+{
+    "name": "Приказ о приеме на работу - согласующий из документа 1С",
+    "group": "Приказ о приеме на работу - согласующий из документа 1С",
+    "participants": [
+        {
+            "role": "Отдел кадров",
+            "group": "Отдел кадров"
+        },
+        {
+            "role": "Руководитель отдела кадров",
+            "group": "Руководитель отдела кадров",
+            "editable": true,
+            "required": true,
+            "editable_scope": "group",
+            "editable_nodes": [
+                "step_2"
+            ]
+        }
+    ],
+    "validators": [],
+    "nodes": [
+        {
+            "key": "start",
+            "state": {
+                "name": "Старт"
+            },
+            "node_type": "begin",
+            "actions": [
+                {
+                    "roles": [],
+                    "type": "system",
+                    "is_employee": true
+                }
+            ]
+        },
+        {
+            "key": "step_1",
+            "node_type": "middle",
+            "state": {
+                "name": "Загрузка приказа о приеме на работу"
+            },
+            "actions": [
+                {
+                    "roles": [
+                        "Отдел кадров"
+                    ],
+                    "type": "upload",
+                    "document_type": "Приказ о приеме на работу"
+                }
+            ],
+            "notify_integration": true
+        },
+        {
+            "key": "step_2",
+            "state": {
+                "name": "Подписание приказа о приеме на работу"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "roles": [
+                        "Руководитель отдела кадров"
+                    ],
+                    "type": "sign",
+                    "document_type": "Приказ о приеме на работу"
+                }
+            ]
+        },
+        {
+            "key": "step_3",
+            "state": {
+                "name": "Проверка подписи"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "system_validate_sign",
+                    "document_type": "Приказ о приеме на работу"
+                }
+            ]
+        },
+        {
+            "key": "completed",
+            "state": {
+                "name": "Завершено"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ]
+        }
+    ],
+    "transitions": [
+        {
+            "from": "start",
+            "to": "step_1"
+        },
+        {
+            "from": "step_1",
+            "to": "step_2"
+        },
+        {
+            "from": "step_2",
+            "to": "step_3"
+        },
+        {
+            "from": "step_3",
+            "to": "completed"
+        }
+    ]
+}

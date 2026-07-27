@@ -1,0 +1,349 @@
+{
+    "name": "Заявка на компенсацию отпуска (сравнение дней отсутствий по числам)",
+    "group": "Заявка на компенсацию отпуска (сравнение дней отсутствий по числам)",
+    "participants": [
+        {
+            "role": "Отдел кадров",
+            "group": "Отдел кадров"
+        }
+    ],
+    "validators": [
+        {
+            "type": "number",
+            "attributes": [
+                "Количество дней на компенсацию"
+            ]
+        },
+        {
+            "type": "available_days_check",
+            "attributes": [
+                "Количество дней на компенсацию",
+                "Вид отпуска на компенсацию"
+            ],
+            "settings": {
+                "operation": "le"
+            }
+        },
+        {
+            "type": "number",
+            "attributes": [
+                "Количество дней на компенсацию 2"
+            ]
+        },
+        {
+            "type": "available_days_check",
+            "attributes": [
+                "Количество дней на компенсацию 2",
+                "Вид отпуска на компенсацию 2"
+            ],
+            "settings": {
+                "operation": "le"
+            }
+        },
+        {
+            "type": "number",
+            "attributes": [
+                "Количество дней на компенсацию 3"
+            ]
+        },
+        {
+            "type": "available_days_check",
+            "attributes": [
+                "Количество дней на компенсацию 3",
+                "Вид отпуска на компенсацию 3"
+            ],
+            "settings": {
+                "operation": "le"
+            }
+        },
+        {
+            "type": "values_compare",
+            "attributes": [
+                "Вид отпуска на компенсацию",
+                "Вид отпуска на компенсацию 2"
+            ],
+            "settings": {
+                "operation": "ne"
+            }
+        },
+        {
+            "type": "values_compare",
+            "attributes": [
+                "Вид отпуска на компенсацию 2",
+                "Вид отпуска на компенсацию 3"
+            ],
+            "settings": {
+                "operation": "ne"
+            }
+        },
+        {
+            "type": "values_compare",
+            "attributes": [
+                "Вид отпуска на компенсацию",
+                "Вид отпуска на компенсацию 3"
+            ],
+            "settings": {
+                "operation": "ne"
+            }
+        }
+    ],
+    "nodes": [
+        {
+            "key": "start",
+            "state": {
+                "name": "Старт"
+            },
+            "node_type": "begin",
+            "action": {
+                "type": "system",
+                "is_employee": true
+            }
+        },
+        {
+            "key": "upload_compensation",
+            "state": {
+                "name": "Оформление компенсации"
+            },
+            "node_type": "middle",
+            "action": {
+                "type": "accept",
+                "is_employee": true,
+                "info_type": {
+                    "name": "vacation_types"
+                },
+                "attributes": [
+                    {
+                        "type": "choice",
+                        "name": "Вид отпуска на компенсацию",
+                        "required": true,
+                        "options": {
+                            "choices": [
+                                {
+                                    "label": "Основной",
+                                    "value": "Основной",
+                                    "key": 1
+                                },
+                                {
+                                    "label": "За интенсивный труд и ответственность",
+                                    "value": "За интенсивный труд и ответственность",
+                                    "key": 2
+                                },
+                                {
+                                    "label": "Дополнительный отпуск",
+                                    "value": "Дополнительный отпуск",
+                                    "key": 3
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "name": "Количество дней на компенсацию",
+                        "required": true
+                    },
+                    {
+                        "type": "choice",
+                        "name": "Указать второй тип компенсируемого отпуска",
+                        "options": {
+                            "choices": [
+                                {
+                                    "label": "Нет",
+                                    "value": "2"
+                                },
+                                {
+                                    "label": "Да",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "Вид отпуска на компенсацию 2",
+                        "type": "choice",
+                        "options": {
+                            "choices": [
+                                {
+                                    "label": "Основной",
+                                    "value": "Основной",
+                                    "key": 1
+                                },
+                                {
+                                    "label": "За интенсивный труд и ответственность",
+                                    "value": "За интенсивный труд и ответственность",
+                                    "key": 2
+                                },
+                                {
+                                    "label": "Дополнительный отпуск",
+                                    "value": "Дополнительный отпуск",
+                                    "key": 3
+                                }
+                            ],
+                            "show_when": {
+                                "conditions": [
+                                    {
+                                        "attribute": "Указать второй тип компенсируемого отпуска",
+                                        "equal": [
+                                            "1"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "Количество дней на компенсацию 2",
+                        "type": "text",
+                        "options": {
+                            "show_when": {
+                                "conditions": [
+                                    {
+                                        "attribute": "Указать второй тип компенсируемого отпуска",
+                                        "equal": [
+                                            "1"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        "required": true
+                    },
+                    {
+                        "type": "choice",
+                        "name": "Указать третий тип компенсируемого отпуска",
+                        "options": {
+                            "choices": [
+                                {
+                                    "label": "Нет",
+                                    "value": "2"
+                                },
+                                {
+                                    "label": "Да",
+                                    "value": "1"
+                                }
+                            ],
+                            "show_when": {
+                                "conditions": [
+                                    {
+                                        "attribute": "Указать второй тип компенсируемого отпуска",
+                                        "equal": [
+                                            "1"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "Вид отпуска на компенсацию 3",
+                        "type": "choice",
+                        "options": {
+                            "choices": [
+                                {
+                                    "label": "Основной",
+                                    "value": "Основной",
+                                    "key": 1
+                                },
+                                {
+                                    "label": "За интенсивный труд и ответственность",
+                                    "value": "За интенсивный труд и ответственность",
+                                    "key": 2
+                                },
+                                {
+                                    "label": "Дополнительный отпуск",
+                                    "value": "Дополнительный отпуск",
+                                    "key": 3
+                                }
+                            ],
+                            "show_when": {
+                                "conditions": [
+                                    {
+                                        "attribute": "Указать второй тип компенсируемого отпуска",
+                                        "equal": [
+                                            "1"
+                                        ]
+                                    },
+                                    {
+                                        "attribute": "Указать третий тип компенсируемого отпуска",
+                                        "equal": [
+                                            "1"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    {
+                        "name": "Количество дней на компенсацию 3",
+                        "type": "text",
+                        "options": {
+                            "show_when": {
+                                "conditions": [
+                                    {
+                                        "attribute": "Указать второй тип компенсируемого отпуска",
+                                        "equal": [
+                                            "1"
+                                        ]
+                                    },
+                                    {
+                                        "attribute": "Указать третий тип компенсируемого отпуска",
+                                        "equal": [
+                                            "1"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "key": "check_compensation",
+            "state": {
+                "name": "Проверка оформления компенсации"
+            },
+            "node_type": "middle",
+            "action": {
+                "type": "accept",
+                "roles": [
+                    "Отдел кадров"
+                ],
+                "info_type": {
+                    "name": "vacation_types"
+                },
+                "attributes": [
+                    
+                ]
+            }
+        },
+        {
+            "key": "finish",
+            "state": {
+                "name": "Финиш"
+            },
+            "node_type": "end",
+            "action": {
+                "type": "system"
+            }
+        }
+    ],
+    "transitions": [
+        {
+            "from": "start",
+            "to": "upload_compensation"
+        },
+        {
+            "from": "upload_compensation",
+            "to": "check_compensation",
+            "type": "accept"
+        },
+        {
+            "from": "check_compensation",
+            "to": "finish",
+            "type": "accept"
+        }
+    ]
+}
