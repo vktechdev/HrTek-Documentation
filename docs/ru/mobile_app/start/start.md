@@ -2,7 +2,7 @@
 
 ### Android
 
-Скачайте приложение через магазин приложений — RuStore или AppGalery.
+Скачайте приложение VK HR Tek через магазин приложений — RuStore или AppGalery.
 
 ![](./assets/image3.png)
 
