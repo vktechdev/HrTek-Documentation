@@ -2,7 +2,7 @@
 
 ### Android
 
-Скачайте приложение VK HR Tek через магазин приложений — RuStore или AppGalery.
+Скачайте приложение VK HR Tek и получайте обновления в [RuStore](https://www.rustore.ru/catalog/app/ru.vk.hrtek) и [AppGallery](https://appgallery.huawei.com/#/app/C107531675). Рекомендуем [установить RuStore](https://www.rustore.ru/instruction), если вы еще этого не сделали.
 
 ![](./assets/image3.png)
 
