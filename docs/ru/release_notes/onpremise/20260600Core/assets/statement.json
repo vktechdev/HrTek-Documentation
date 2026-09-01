@@ -1,0 +1,436 @@
+{
+    "name": "Заявление на предоставление дня отдыха за работу в выходной день",
+    "group": "Заявление на предоставление дня отдыха за работу в выходной день",
+    "participants": [
+        {
+            "role": "Отдел кадров",
+            "group": "Отдел кадров"
+        }
+    ],
+    "options": {
+        "vacation_types": [
+            "Другой день отдыха за работу в выходные и праздничные дни"
+        ]
+    },
+    "validators": [
+        {
+            "type": "min_date",
+            "attributes": [
+                "1. Дата отдыха"
+            ],
+            "settings": {
+                "days_count": 0,
+                "working_days_only": true
+            }
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "2. Дата отдыха"
+            ],
+            "settings": {
+                "days_count": 0,
+                "working_days_only": true
+            }
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "3. Дата отдыха"
+            ],
+            "settings": {
+                "days_count": 0,
+                "working_days_only": true
+            }
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "4. Дата отдыха"
+            ],
+            "settings": {
+                "days_count": 0,
+                "working_days_only": true
+            }
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "5. Дата отдыха"
+            ],
+            "settings": {
+                "days_count": 0,
+                "working_days_only": true
+            }
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "6. Дата отдыха"
+            ],
+            "settings": {
+                "days_count": 0,
+                "working_days_only": true
+            }
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "7. Дата отдыха"
+            ],
+            "settings": {
+                "days_count": 0,
+                "working_days_only": true
+            }
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "8. Дата отдыха"
+            ],
+            "settings": {
+                "days_count": 0,
+                "working_days_only": true
+            }
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "9. Дата отдыха"
+            ],
+            "settings": {
+                "days_count": 0,
+                "working_days_only": true
+            }
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "10. Дата отдыха"
+            ],
+            "settings": {
+                "days_count": 0,
+                "working_days_only": true
+            }
+        }
+    ],
+    "nodes": [
+        {
+            "key": "start",
+            "state": {
+                "name": "Старт"
+            },
+            "node_type": "begin",
+            "actions": [
+                {
+                    "type": "system",
+                    "is_employee": true
+                }
+            ]
+        },
+        {
+            "key": "step_1a",
+            "state": {
+                "name": "Формирование заявления о предоставлении дополнительного дня отдыха за работу в выходной день",
+                "description": "Выбор дат осуществляется в рамках одного месяца. Если нужно выбрать даты в двух разных месяцах, нужно оформить две разных заявки"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "accept",
+                    "is_employee": true,
+                    "info_type": {
+                        "name": "vacation_types"
+                    },
+                    "attributes": [
+                        {
+                            "name": "Количество планируемых дней отдыха за работу в выходной или нерабочий праздничный день",
+                            "type": "choice",
+                            "required": true,
+                            "choices_limit_by": "compensatory_days",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "1",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "label": "2",
+                                        "value": "2"
+                                    },
+                                    {
+                                        "label": "3",
+                                        "value": "3"
+                                    },
+                                    {
+                                        "label": "4",
+                                        "value": "4"
+                                    },
+                                    {
+                                        "label": "5",
+                                        "value": "5"
+                                    },
+                                    {
+                                        "label": "6",
+                                        "value": "6"
+                                    },
+                                    {
+                                        "label": "7",
+                                        "value": "7"
+                                    },
+                                    {
+                                        "label": "8",
+                                        "value": "8"
+                                    },
+                                    {
+                                        "label": "9",
+                                        "value": "9"
+                                    },
+                                    {
+                                        "label": "10",
+                                        "value": "10"
+                                    }
+                                ],
+                                "tooltip": {
+                                    "title": "",
+                                    "description": "Вам доступно накопленное количество дней для выбора",
+                                    "style": "disclaimer",
+                                    "visible": false
+                                }
+                            }
+                        },
+                        {
+                            "name": "1. Дата отдыха",
+                            "type": "date",
+                            "required": true,
+                            "options": {
+                                "tooltip": {
+                                    "title": "Важно!",
+                                    "description": "Дата отдыха не должна быть позднеее 1 года от Даты работы в выходной день",
+                                    "style": "disclaimer"
+                                }
+                            }
+                        },
+                        {
+                            "name": "2. Дата отдыха",
+                            "type": "date",
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Количество планируемых дней отдыха за работу в выходной или нерабочий праздничный день",
+                                    "equal": [
+                                        "1"
+                                    ]
+                                },
+                                "tooltip": {
+                                    "title": "Важно!",
+                                    "description": "Дата отдыха не должна быть позднеее 1 года от Даты работы в выходной или нерабочий праздничный день",
+                                    "style": "disclaimer"
+                                }
+                            }
+                        },
+                        {
+                            "name": "3. Дата отдыха",
+                            "type": "date",
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Количество планируемых дней отдыха за работу в выходной или нерабочий праздничный день",
+                                    "equal": [
+                                        "1",
+                                        "2"
+                                    ]
+                                },
+                                "tooltip": {
+                                    "title": "Важно!",
+                                    "description": "Дата отдыха не должна быть позднеее 1 года от Даты работы в выходной или нерабочий праздничный день",
+                                    "style": "disclaimer"
+                                }
+                            }
+                        },
+                        {
+                            "name": "4. Дата отдыха",
+                            "type": "date",
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Количество планируемых дней отдыха за работу в выходной или нерабочий праздничный день",
+                                    "equal": [
+                                        "1",
+                                        "2",
+                                        "3"
+                                    ]
+                                },
+                                "tooltip": {
+                                    "title": "Важно!",
+                                    "description": "Дата отдыха не должна быть позднеее 1 года от Даты работы в выходной или нерабочий праздничный день",
+                                    "style": "disclaimer"
+                                }
+                            }
+                        },
+                        {
+                            "name": "5. Дата отдыха",
+                            "type": "date",
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Количество планируемых дней отдыха за работу в выходной или нерабочий праздничный день",
+                                    "equal": [
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4"
+                                    ]
+                                },
+                                "tooltip": {
+                                    "title": "Важно!",
+                                    "description": "Дата отдыха не должна быть позднеее 1 года от Даты работы в выходной или нерабочий праздничный день",
+                                    "style": "disclaimer"
+                                }
+                            }
+                        },
+                        {
+                            "name": "6. Дата отдыха",
+                            "type": "date",
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Количество планируемых дней отдыха за работу в выходной или нерабочий праздничный день",
+                                    "equal": [
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5"
+                                    ]
+                                },
+                                "tooltip": {
+                                    "title": "Важно!",
+                                    "description": "Дата отдыха не должна быть позднеее 1 года от Даты работы в выходной или нерабочий праздничный день",
+                                    "style": "disclaimer"
+                                }
+                            }
+                        },
+                        {
+                            "name": "7. Дата отдыха",
+                            "type": "date",
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Количество планируемых дней отдыха за работу в выходной или нерабочий праздничный день",
+                                    "equal": [
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5",
+                                        "6"
+                                    ]
+                                },
+                                "tooltip": {
+                                    "title": "Важно!",
+                                    "description": "Дата отдыха не должна быть позднеее 1 года от Даты работы в выходной или нерабочий праздничный день",
+                                    "style": "disclaimer"
+                                }
+                            }
+                        },
+                        {
+                            "name": "8. Дата отдыха",
+                            "type": "date",
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Количество планируемых дней отдыха за работу в выходной или нерабочий праздничный день",
+                                    "equal": [
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5",
+                                        "6",
+                                        "7"
+                                    ]
+                                },
+                                "tooltip": {
+                                    "title": "Важно!",
+                                    "description": "Дата отдыха не должна быть позднеее 1 года от Даты работы в выходной или нерабочий праздничный день",
+                                    "style": "disclaimer"
+                                }
+                            }
+                        },
+                        {
+                            "name": "9. Дата отдыха",
+                            "type": "date",
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Количество планируемых дней отдыха за работу в выходной или нерабочий праздничный день",
+                                    "equal": [
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5",
+                                        "6",
+                                        "7",
+                                        "8"
+                                    ]
+                                },
+                                "tooltip": {
+                                    "title": "Важно!",
+                                    "description": "Дата отдыха не должна быть позднеее 1 года от Даты работы в выходной или нерабочий праздничный день",
+                                    "style": "disclaimer"
+                                }
+                            }
+                        },
+                        {
+                            "name": "10. Дата отдыха",
+                            "type": "date",
+                            "options": {
+                                "hide_when": {
+                                    "attribute": "Количество планируемых дней отдыха за работу в выходной или нерабочий праздничный день",
+                                    "equal": [
+                                        "1",
+                                        "2",
+                                        "3",
+                                        "4",
+                                        "5",
+                                        "6",
+                                        "7",
+                                        "8",
+                                        "9"
+                                    ]
+                                },
+                                "tooltip": {
+                                    "title": "Важно!",
+                                    "description": "Дата отдыха не должна быть позднеее 1 года от Даты работы в выходной или нерабочий праздничный день",
+                                    "style": "disclaimer"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            "employee_cancelable": true
+        },
+        {
+            "key": "step_2",
+            "state": {
+                "name": "Проверка документов"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "accept",
+                    "roles": [
+                        "Отдел кадров"
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "end",
+            "state": {
+                "name": "Завершено"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ]
+        }
+    ]
+}
