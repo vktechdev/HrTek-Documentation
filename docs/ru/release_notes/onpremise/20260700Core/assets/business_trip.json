@@ -1,0 +1,278 @@
+{
+  "name": "Детальная страница заявки Командировки",
+  "group": "Детальная страница заявки Командировки",
+  "tags": [
+    "Командировки"
+  ],
+  "participants": [
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров"
+    }
+  ],
+  "validators": [
+    {
+      "type": "min_date",
+      "attributes": [
+        "Дата начала"
+      ],
+      "settings": {
+        "days_count": 0,
+        "working_days_only": false
+      }
+    },
+    {
+      "type": "min_duration",
+      "attributes": [
+        "Дата начала",
+        "Дата окончания"
+      ],
+      "settings": {
+        "min_duration": 1,
+        "working_days_only": false
+      }
+    },
+    {
+      "type": "min_duration",
+      "attributes": [
+        "Дата отбытия",
+        "Дата прибытия"
+      ],
+      "settings": {
+        "min_duration": 1,
+        "working_days_only": false
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "key": "start",
+      "state": {
+        "name": "Старт"
+      },
+      "node_type": "begin",
+      "actions": [
+        {
+          "roles": [],
+          "type": "system",
+          "is_employee": true
+        }
+      ]
+    },
+    {
+      "key": "step_1",
+      "state": {
+        "name": "Заполнение заявки на командировку"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "roles": [],
+          "type": "accept",
+          "is_employee": true,
+          "attributes_meta": [
+            {
+              "type": "document",
+              "title": "Параметры командировки",
+              "objects": [
+                {
+                  "type": "block",
+                  "objects": [
+                    {
+                      "type": "row",
+                      "is_bottom": true,
+                      "objects": [
+                        {
+                          "type": "attribute",
+                          "name": "Дата начала"
+                        },
+                        {
+                          "type": "attribute",
+                          "name": "Дата окончания"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "objects": [
+                        {
+                          "type": "attribute",
+                          "name": "Место отправления (страна, город, организация)"
+                        },
+                        {
+                          "type": "attribute",
+                          "name": "Место назначения (страна, город, организация)"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "objects": [
+                        {
+                          "type": "attribute",
+                          "name": "Цель командировки"
+                        },
+                        {
+                          "type": "attribute",
+                          "name": "Центр затрат"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "document",
+              "is_multiple": true,
+              "title": "Детализация маршрута командировки",
+              "objects": [
+                {
+                  "type": "block",
+                  "objects": [
+                    {
+                      "type": "row",
+                      "objects": [
+                        {
+                          "type": "attribute",
+                          "name": "Место назначения"
+                        },
+                        {
+                          "type": "attribute",
+                          "name": "Дата отбытия"
+                        },
+                        {
+                          "type": "attribute",
+                          "name": "Дата прибытия"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "document",
+              "title": "Письмо-основане",
+              "objects": [
+                {
+                  "type": "block",
+                  "objects": [
+                    {
+                      "type": "attribute",
+                      "name": "Загрузите письмо-основание"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "type": "date",
+              "name": "Дата начала",
+              "required": true
+            },
+            {
+              "type": "date",
+              "name": "Дата окончания",
+              "required": true
+            },
+            {
+              "type": "text",
+              "name": "Место отправления (страна, город, организация)",
+              "required": true
+            },
+            {
+              "type": "text",
+              "name": "Место назначения (страна, город, организация)",
+              "required": true
+            },
+            {
+              "type": "text",
+              "name": "Цель командировки",
+              "required": true
+            },
+            {
+              "type": "text",
+              "name": "Центр затрат",
+              "required": true
+            },
+            {
+              "type": "text",
+              "name": "Место назначения"
+            },
+            {
+              "type": "date",
+              "name": "Дата отбытия"
+            },
+            {
+              "type": "date",
+              "name": "Дата прибытия"
+            },
+            {
+              "type": "file",
+              "name": "Загрузите письмо-основание",
+              "required": true
+            }
+          ]
+        }
+      ],
+      "employee_cancelable": true
+    },
+    {
+      "key": "step_3_return",
+      "state": {
+        "name": "Согласование факта командировки"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Отдел кадров"
+          ],
+          "name": "Согласовано"
+        },
+        {
+          "type": "return",
+          "roles": [
+            "Отдел кадров"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "end",
+      "state": {
+        "name": "Завершено"
+      },
+      "node_type": "end",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "from": "start",
+      "to": "step_1"
+    },
+    {
+      "from": "step_1",
+      "to": "step_3_return"
+    },
+    {
+      "from": "step_3_return",
+      "to": "end",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_3_return",
+      "to": "step_1",
+      "action_type": "return"
+    }
+  ]
+}

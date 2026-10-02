@@ -1,0 +1,1346 @@
+{
+  "name": "Отпуск по графику_из_заявок",
+  "group": "Отпуск по графику_из_заявок",
+  "options": {
+    "vacation_types": [
+      "Основной",
+      "За интенсивный труд и ответственность"
+    ]
+  },
+  "participants": [
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров",
+      "editable": true,
+      "editable_scope": "group"
+    },
+    {
+      "role": "Отдел кадров",
+      "group": "Отдел кадров",
+      "editable": true,
+      "editable_scope": "group"
+    },
+    {
+      "role": "Руководитель отдела кадров",
+      "group": "Руководитель отдела кадров"
+    },
+    {
+      "role": "Руководитель отдела кадров",
+      "group": "Руководитель отдела кадров"
+    },
+    {
+      "role": "Бухгалтерия",
+      "group": "Бухгалтерия"
+    },
+    {
+      "role": "Бухгалтерия",
+      "group": "Бухгалтерия"
+    },
+    {
+      "role": "Руководитель",
+      "editable": true,
+      "editable_scope": "company"
+    }, 
+    {
+      "role": "Системный пользователь",
+      "group": "Системный пользователь"
+    }
+  ],
+  "nodes": [
+    {
+      "key": "start",
+      "state": {
+        "name": "Старт"
+      },
+      "node_type": "begin",
+      "actions": [
+        {
+          "type": "system",
+          "is_employee": true,
+          "roles": [
+            "Отдел кадров"
+          ],
+          "attributes": []
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "prestep_1",
+      "state": {
+        "name": "Выбор данных ПГО сотрудника"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "attributes": [
+            {
+              "name": "Период запланированного отпуска",
+              "external_id": "f309e911-5b94-45ac-81c3-2daeffedf6a6",
+              "type": "choice",
+              "options": {
+                "choices": [
+                  {
+                    "label": "Нет",
+                    "value": "0"
+                  }
+                ],
+                "is_multiple": true
+              }
+            }
+          ],
+          "type": "system_get_pgo_period"
+        }
+      ]
+    },
+    {
+      "key": "step_0",
+      "state": {
+        "name": "Выбор периода запланированного отпуска",
+        "description": "Выберите запланированный период отпуска для оформления заявки на отпуск по графику"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "is_employee": true,
+          "attributes": [
+            {
+              "name": "Период запланированного отпуска",
+              "description": "Можно выбрать до 5 периодов.",
+              "external_id": "f309e911-5b94-45ac-81c3-2daeffedf6a6",
+              "type": "choice",
+              "options": {
+                "choices": [
+                  {
+                    "label": "Нет",
+                    "value": "0"
+                  }
+                ],
+                "is_multiple": true
+              }
+            }
+          ]
+        }
+      ],
+      "employee_cancelable": true,
+      "company_cancelable": true
+    },
+    {
+      "key": "prestep_2",
+      "state": {
+        "name": "Заполнение атрибутов данными ПГО сотрудника"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "attributes": [
+            {
+              "name": "Период запланированного отпуска",
+              "external_id": "f309e911-5b94-45ac-81c3-2daeffedf6a6",
+              "type": "choice",
+              "options": {
+                "choices": [
+                  {
+                    "label": "Нет",
+                    "value": "0"
+                  }
+                ],
+                "is_multiple": true
+              }
+            },
+            {
+              "name": "Дата начала отпуска",
+              "external_id": "b702174b-f9e1-4ec4-97a3-78642eb46e3a",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска",
+              "external_id": "b6678658-e673-4782-9d0d-7eb15394d7e5",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней",
+              "external_id": "b14325bb-508d-4fa9-b70e-35b36f48e3f8",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия",
+              "external_id": "68747600-82df-45b2-b434-52bde1cce4e7",
+              "type": "text"
+            },
+            {
+              "name": "Дата начала отпуска 1",
+              "external_id": "618b4c3d-b117-411f-b8e0-768ccddcf98a",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска 1",
+              "external_id": "11c46dd8-69c7-4fcb-8d61-f1b998223d7a",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней 1",
+              "external_id": "9cda84b2-fc6c-40dc-a534-6a0b99684b47",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия 1",
+              "external_id": "dffee9c1-960e-40d1-a0b4-2103dfeee570",
+              "type": "text"
+            },
+            {
+              "name": "Дата начала отпуска 2",
+              "external_id": "df831f36-2887-4e38-b821-5da41cc79ef2",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска 2",
+              "external_id": "75cf7a13-93cb-4ac0-a404-85baad279f3f",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней 2",
+              "external_id": "26d44350-8069-43a5-ade9-6ab9e732f72d",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия 2",
+              "external_id": "0b1ee7ac-4a55-4da4-9a06-9c4e4b94482e",
+              "type": "text"
+            },
+            {
+              "name": "Дата начала отпуска 3",
+              "external_id": "164c8694-a803-486e-881c-70e718a39279",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска 3",
+              "external_id": "5e8f489f-7308-4aca-99b9-0e64ad3fdf05",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней 3",
+              "external_id": "4e3ac7e3-64a1-439b-8cbb-3bbde7ea917b",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия 3",
+              "external_id": "a6eba3d1-a2f2-4b4d-a98a-42ea2d702e42",
+              "type": "text"
+            },
+            {
+              "name": "Дата начала отпуска 4",
+              "external_id": "7e5bb0f1-5201-4f36-9b47-9e7d261dd792",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска 4",
+              "external_id": "1bf5abc2-b941-4958-9ca7-3d002dbd382b",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней 4",
+              "external_id": "2640eb42-cc52-4495-8db7-28572c1257eb",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия 4",
+              "external_id": "831bdc0d-abd3-44f3-993b-f1a89691342a",
+              "type": "text"
+            },
+            {
+              "name": "Дата начала отпуска 5",
+              "external_id": "007119c9-770f-4ec0-ae08-b924101f448f",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска 5",
+              "external_id": "4a67438e-024e-4dc9-9a38-4c212ebfdf40",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней 5",
+              "external_id": "7ea9d077-77ca-4640-9d41-ecb3169aa6a0",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия 5",
+              "external_id": "942b3b4c-9430-4b80-ba50-e4ffa986cf95",
+              "type": "text"
+            },
+            {
+              "name": "Компенсация",
+              "external_id": "6f796e54-8a3a-41ab-a0e8-e579e787f23f",
+              "type": "choice",
+              "options": {
+                "choices": [
+                  {
+                    "label": "ЕСВЕОО",
+                    "value": "1"
+                  },
+                  {
+                    "label": "Без компенсации",
+                    "value": "2"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Место проведения отпуска",
+              "external_id": "c80ffeea-4544-486b-964a-95930caceb1a",
+              "type": "choice",
+              "options": {
+                "choices": [
+                  {
+                    "label": "Россия",
+                    "value": "1"
+                  },
+                  {
+                    "label": "Китай",
+                    "value": "2"
+                  },
+                  {
+                    "label": "Турция",
+                    "value": "3"
+                  },
+                  {
+                    "label": "Армения",
+                    "value": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Комментарий",
+              "external_id": "2ddc62cd-fe40-4763-b9f0-52abfcc23b7b",
+              "type": "textarea"
+            }
+          ],
+          "type": "system_fill_event_pgo_attributes",
+          "max_period": 5
+        }
+      ]
+    },
+    {
+      "key": "prestep_2_result",
+      "node_type": "middle",
+      "state": {
+        "name": "Проверка допустимости выбранного периода"
+      },
+      "actions": [
+        {
+          "type": "accept",
+          "name": "Период выбран корректно",
+          "roles": [
+            "Системный пользователь"
+          ]
+        },
+        {
+          "type": "return",
+          "name": "Период выбран некорректно",
+          "roles": [
+            "Системный пользователь"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "step_1",
+      "state": {
+        "name": "Формирование заявления о предоставлении ежегодного оплачиваемого отпуска"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "generate_document_from_template",
+          "is_employee": true,
+          "document_type": "Заявление о предоставлении отпуска",
+          "attributes": [
+            {
+              "name": "Дата начала отпуска",
+              "external_id": "b702174b-f9e1-4ec4-97a3-78642eb46e3a",
+              "type": "date",
+              "required": true,
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска",
+              "external_id": "b6678658-e673-4782-9d0d-7eb15394d7e5",
+              "type": "date",
+              "required": true
+            },
+            {
+              "name": "Количество календарных дней",
+              "external_id": "b14325bb-508d-4fa9-b70e-35b36f48e3f8",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия",
+              "external_id": "68747600-82df-45b2-b434-52bde1cce4e7",
+              "type": "text"
+            },
+            {
+              "name": "Дата начала отпуска 1",
+              "external_id": "618b4c3d-b117-411f-b8e0-768ccddcf98a",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска 1",
+              "external_id": "11c46dd8-69c7-4fcb-8d61-f1b998223d7a",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней 1",
+              "external_id": "9cda84b2-fc6c-40dc-a534-6a0b99684b47",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия 1",
+              "external_id": "dffee9c1-960e-40d1-a0b4-2103dfeee570",
+              "type": "text"
+            },
+            {
+              "name": "Дата начала отпуска 2",
+              "external_id": "df831f36-2887-4e38-b821-5da41cc79ef2",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска 2",
+              "external_id": "75cf7a13-93cb-4ac0-a404-85baad279f3f",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней 2",
+              "external_id": "26d44350-8069-43a5-ade9-6ab9e732f72d",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия 2",
+              "external_id": "0b1ee7ac-4a55-4da4-9a06-9c4e4b94482e",
+              "type": "text"
+            },
+            {
+              "name": "Дата начала отпуска 3",
+              "external_id": "164c8694-a803-486e-881c-70e718a39279",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска 3",
+              "external_id": "5e8f489f-7308-4aca-99b9-0e64ad3fdf05",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней 3",
+              "external_id": "4e3ac7e3-64a1-439b-8cbb-3bbde7ea917b",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия 3",
+              "external_id": "a6eba3d1-a2f2-4b4d-a98a-42ea2d702e42",
+              "type": "text"
+            },
+            {
+              "name": "Дата начала отпуска 4",
+              "external_id": "7e5bb0f1-5201-4f36-9b47-9e7d261dd792",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска 4",
+              "external_id": "1bf5abc2-b941-4958-9ca7-3d002dbd382b",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней 4",
+              "external_id": "2640eb42-cc52-4495-8db7-28572c1257eb",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия 4",
+              "external_id": "831bdc0d-abd3-44f3-993b-f1a89691342a",
+              "type": "text"
+            },
+            {
+              "name": "Дата начала отпуска 5",
+              "external_id": "007119c9-770f-4ec0-ae08-b924101f448f",
+              "type": "date",
+              "options": {
+                "info_type": {
+                  "name": "vacation_days",
+                  "show_vacation_types": false,
+                  "show_negative": true
+                }
+              }
+            },
+            {
+              "name": "Дата окончания отпуска 5",
+              "external_id": "4a67438e-024e-4dc9-9a38-4c212ebfdf40",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней 5",
+              "external_id": "7ea9d077-77ca-4640-9d41-ecb3169aa6a0",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия 5",
+              "external_id": "942b3b4c-9430-4b80-ba50-e4ffa986cf95",
+              "type": "text"
+            },
+            {
+              "name": "Компенсация",
+              "external_id": "6f796e54-8a3a-41ab-a0e8-e579e787f23f",
+              "type": "choice",
+              "options": {
+                "choices": [
+                  {
+                    "label": "ЕСВЕОО",
+                    "value": "1"
+                  },
+                  {
+                    "label": "Без компенсации",
+                    "value": "2"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Место проведения отпуска",
+              "external_id": "c80ffeea-4544-486b-964a-95930caceb1a",
+              "type": "choice",
+              "required": true,
+              "options": {
+                "choices": [
+                  {
+                    "label": "Россия",
+                    "value": "1"
+                  },
+                  {
+                    "label": "Китай",
+                    "value": "2"
+                  },
+                  {
+                    "label": "Турция",
+                    "value": "3"
+                  },
+                  {
+                    "label": "Армения",
+                    "value": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Комментарий",
+              "external_id": "2ddc62cd-fe40-4763-b9f0-52abfcc23b7b",
+              "type": "textarea"
+            }
+          ],
+          "template": {
+            "file_id": 2631,
+            "placeholders": [
+              {
+                "key": "DateFrom",
+                "attribute": "Дата начала отпуска"
+              },
+              {
+                "key": "DateTo",
+                "attribute": "Дата окончания отпуска"
+              }
+            ]
+          }
+        }
+      ],
+      "employee_cancelable": true,
+      "company_cancelable": true
+    },
+    {
+      "key": "step_2",
+      "state": {
+        "name": "Подписание заявления о предоставлении ежегодного оплачиваемого отпуска"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "sign",
+          "is_employee": true,
+          "document_type": "Заявление о предоставлении отпуска",
+          "signature_type": "pep"
+        }
+      ],
+      "employee_cancelable": true,
+      "company_cancelable": true
+    },
+    {
+      "key": "step_3",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Заявление о предоставлении отпуска"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_4_return",
+      "state": {
+        "name": "Подтверждение ежегодного оплачиваемого отпуска"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Руководитель"
+          ]
+        },
+        {
+          "type": "return",
+          "roles": [
+            "Руководитель"
+          ]
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_5",
+      "state": {
+        "name": "Загрузка служебной записки"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "upload",
+          "roles": [
+            "Руководитель"
+          ],
+          "document_type": "Служебная записка"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_6",
+      "state": {
+        "name": "Согласование заявления на отпуск"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Отдел кадров"
+          ],
+          "attributes": [
+            {
+              "name": "Комментарий",
+              "external_id": "2ddc62cd-fe40-4763-b9f0-52abfcc23b7b",
+              "type": "textarea"
+            }
+          ]
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_7",
+      "state": {
+        "name": "Согласование заявления на отпуск"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Бухгалтерия"
+          ],
+          "attributes": [
+            {
+              "name": "Комментарий",
+              "external_id": "2ddc62cd-fe40-4763-b9f0-52abfcc23b7b",
+              "type": "textarea"
+            }
+          ]
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_8",
+      "state": {
+        "name": "Загрузка приказа о предоставлении отпуска работнику"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "upload",
+          "roles": [
+            "Отдел кадров"
+          ],
+          "document_type": "Приказ о предоставлении отпуска работнику"
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -6,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true,
+      "notify_integration": true
+    },
+    {
+      "key": "step_9",
+      "state": {
+        "name": "Подписание приказа о предоставлении отпуска работнику"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "sign",
+          "roles": [
+            "Руководитель отдела кадров"
+          ],
+          "document_type": "Приказ о предоставлении отпуска работнику",
+          "signature_type": "pep"
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -5,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "step_10",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Приказ о предоставлении отпуска работнику"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_11",
+      "state": {
+        "name": "Подписание служебной записки"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "sign",
+          "roles": [
+            "Руководитель отдела кадров"
+          ],
+          "document_type": "Служебная записка",
+          "signature_type": "pep"
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -5,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "step_12",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Служебная записка"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "merge",
+      "state": {
+        "name": "Проверка"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_13",
+      "state": {
+        "name": "Подписание приказа о предоставлении отпуска работнику"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "sign",
+          "is_employee": true,
+          "document_type": "Приказ о предоставлении отпуска работнику",
+          "signature_type": "pep"
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -3,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "step_14",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Приказ о предоставлении отпуска работнику"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_15",
+      "state": {
+        "name": "Подписание служебной записки"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "sign",
+          "is_employee": true,
+          "document_type": "Служебная записка",
+          "signature_type": "pep"
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -3,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "step_16",
+      "state": {
+        "name": "Проверка подписи"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system_validate_sign",
+          "document_type": "Служебная записка"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "merge1",
+      "state": {
+        "name": "Проверка"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "step_17_branch",
+      "state": {
+        "name": "Добавить дополнительный документ?"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "name": "Да",
+          "roles": [
+            "Бухгалтерия"
+          ]
+        },
+        {
+          "type": "decline",
+          "name": "Нет",
+          "roles": [
+            "Бухгалтерия"
+          ]
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -1,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "step_18a",
+      "state": {
+        "name": "Загрузка Документа"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "upload",
+          "roles": [
+            "Бухгалтерия"
+          ],
+          "document_type": "Документ"
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -1,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "step_19a",
+      "state": {
+        "name": "Проверка документов"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Отдел кадров"
+          ]
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -1,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "step_18b",
+      "state": {
+        "name": "Проверка документов"
+      },
+      "node_type": "middle",
+      "actions": [
+        {
+          "type": "accept",
+          "roles": [
+            "Отдел кадров"
+          ]
+        }
+      ],
+      "deadline_settings": {
+        "settings": [
+          {
+            "reference": "attribute",
+            "unit": "day",
+            "term": -1,
+            "attribute": "Дата начала отпуска",
+            "outcome": "to_paper"
+          }
+        ],
+        "outcome": "to_paper",
+        "reference": "",
+        "unit": "",
+        "term": 0
+      },
+      "company_cancelable": true
+    },
+    {
+      "key": "finish_a",
+      "state": {
+        "name": "Завершено"
+      },
+      "node_type": "end",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ],
+      "company_cancelable": true
+    },
+    {
+      "key": "finish_b",
+      "state": {
+        "name": "Завершено"
+      },
+      "node_type": "end",
+      "actions": [
+        {
+          "type": "system"
+        }
+      ],
+      "company_cancelable": true
+    }
+  ],
+  "transitions": [
+    {
+      "from": "start",
+      "to": "prestep_1",
+      "action_type": "system"
+    },
+    {
+      "from": "prestep_1",
+      "to": "step_0",
+      "action_type": "system_get_pgo_period"
+    },
+    {
+      "from": "step_0",
+      "to": "prestep_2",
+      "action_type": "accept"
+    },
+    {
+      "from": "prestep_2",
+      "to": "prestep_2_result",
+      "action_type": "system_fill_event_pgo_attributes"
+    },
+     {
+      "from": "prestep_2_result",
+      "to": "step_0",
+      "action_type": "return"
+    },
+    {
+      "from": "prestep_2_result",
+      "to": "step_1",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_1",
+      "to": "step_2",
+      "action_type": "generate_document_from_template"
+    },
+    {
+      "from": "step_2",
+      "to": "step_3",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_3",
+      "to": "step_4_return",
+      "action_type": "system_validate_sign"
+    },
+    {
+      "from": "step_4_return",
+      "to": "step_5",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_4_return",
+      "to": "step_1",
+      "action_type": "return"
+    },
+    {
+      "from": "step_5",
+      "to": "step_6",
+      "action_type": "upload"
+    },
+    {
+      "from": "step_6",
+      "to": "step_8",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_5",
+      "to": "step_7",
+      "action_type": "upload"
+    },
+    {
+      "from": "step_7",
+      "to": "step_8",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_8",
+      "to": "step_9",
+      "action_type": "upload"
+    },
+    {
+      "from": "step_9",
+      "to": "step_10",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_10",
+      "to": "step_11",
+      "action_type": "system_validate_sign"
+    },
+    {
+      "from": "step_11",
+      "to": "step_12",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_12",
+      "to": "merge",
+      "action_type": "system_validate_sign"
+    },
+    {
+      "from": "merge",
+      "to": "step_13",
+      "action_type": "system"
+    },
+    {
+      "from": "step_13",
+      "to": "step_14",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_14",
+      "to": "merge1",
+      "action_type": "system_validate_sign"
+    },
+    {
+      "from": "merge",
+      "to": "step_15",
+      "action_type": "system"
+    },
+    {
+      "from": "step_15",
+      "to": "step_16",
+      "action_type": "sign"
+    },
+    {
+      "from": "step_16",
+      "to": "merge1",
+      "action_type": "system_validate_sign"
+    },
+    {
+      "from": "merge1",
+      "to": "step_17_branch",
+      "action_type": "system"
+    },
+    {
+      "from": "step_17_branch",
+      "to": "step_18a",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_18a",
+      "to": "step_19a",
+      "action_type": "upload"
+    },
+    {
+      "from": "step_19a",
+      "to": "finish_a",
+      "action_type": "accept"
+    },
+    {
+      "from": "step_17_branch",
+      "to": "step_18b",
+      "action_type": "decline"
+    },
+    {
+      "from": "step_18b",
+      "to": "finish_b",
+      "action_type": "accept"
+    }
+  ],
+  "validators": [
+    {
+      "type": "working_day",
+      "attributes": [
+        "Дата начала отпуска",
+        "Дата окончания отпуска"
+      ],
+      "settings": null
+    },
+    {
+      "type": "min_duration",
+      "attributes": [
+        "Дата начала отпуска",
+        "Дата окончания отпуска"
+      ],
+      "settings": {
+        "min_duration": 0,
+        "working_days_only": false,
+        "ignore_holidays": false,
+        "vacation_type": null
+      }
+    },
+    {
+      "type": "no_overlap",
+      "attributes": [
+        "Дата начала отпуска",
+        "Дата окончания отпуска"
+      ],
+      "settings": null
+    }
+  ],
+  "information_security": {}
+}

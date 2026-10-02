@@ -1,0 +1,432 @@
+{
+    "name": "Заявление о переносе отпуска из календаря",
+    "group": "Заявление о переносе отпуска из календаря",
+    "tags": [
+    "change_vacation_from_calendar"
+  ],
+    "participants": [
+        {
+            "role": "Отдел кадров",
+            "group": "Отдел кадров"
+        },
+        {
+            "role": "Руководитель управленческий 1"
+        },
+        {
+            "role": "Руководитель управленческий 2"
+        },
+        {
+            "role": "Руководитель управленческий 3"
+        },
+        {
+            "role": "Руководитель управленческий 4"
+        },
+        {
+            "role": "Руководитель управленческий 5"
+        },
+        {
+            "role": "Руководитель управленческий 6"
+        },
+        {
+            "role": "Руководитель управленческий 7"
+        },
+        {
+            "role": "Руководитель управленческий 8"
+        },
+        {
+            "role": "Руководитель управленческий 9"
+        },
+        {
+            "role": "Руководитель управленческий 10"
+        }
+    ],
+    "nodes": [
+        {
+            "key": "start",
+            "state": {
+                "name": "Старт"
+            },
+            "node_type": "begin",
+            "actions": [
+                {
+                    "type": "system",
+                    "is_employee": true,
+					"attributes": [
+            {
+              "name": "Дата начала отпуска",
+              "external_id": "b702174b-f9e1-4ec4-97a3-78642eb46e3a",
+              "type": "date"            
+            },
+            {
+              "name": "Дата окончания отпуска",
+              "external_id": "b6678658-e673-4782-9d0d-7eb15394d7e5",
+              "type": "date"
+            },
+            {
+              "name": "Количество календарных дней",
+              "external_id": "b14325bb-508d-4fa9-b70e-35b36f48e3f8",
+              "type": "text"
+            },
+            {
+              "name": "Тип отсутствия",
+              "external_id": "68747600-82df-45b2-b434-52bde1cce4e7",
+              "type": "text"
+            }
+			]
+					
+                }
+            ],
+            "company_cancelable": true
+        },
+        {
+            "key": "step_1",
+            "state": {
+                "name": "Формирование заявления о переносе отпуска"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "generate_document_from_template",
+                    "is_employee": true,
+                    "document_type": "Заявление работника о переносе ежегодного оплачиваемого отпуска на другой срок",
+                    "attributes": [
+                        {
+                            "name": "Дата начала отпуска",
+                            "external_id": "b702174b-f9e1-4ec4-97a3-78642eb46e3a",
+                            "type": "date",
+                            "required": true
+                        },
+                        {
+                            "name": "Дата окончания отпуска",
+                            "external_id": "b6678658-e673-4782-9d0d-7eb15394d7e5",
+                            "type": "date",
+                            "required": true
+                        },
+                        {
+                            "name": "Денежная компенсация",
+                            "external_id": "712e6ce0-3a51-471f-ba18-ef29891d1b31",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "Да",
+                                        "value": "Да"
+                                    },
+                                    {
+                                        "label": "Нет",
+                                        "value": "Нет"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Новая дата начала отпуска",
+                            "external_id": "2df3199b-9c6f-4d9d-92cf-d522f237c745",
+                            "type": "date",
+                            "required": true,
+                            "options": {
+                                "tooltip": {
+                                    "title": "Подсказка",
+                                    "description": "Вы можете указать только один период для переноса отпуска. Если вам необходимо разделить отпуск на несколько периодов, воспользуйтесь процессом «Заявление о переносе отпуска» несколько раз.",
+                                    "style": "disclaimer"
+                                },
+                                "catalog_address_payload_array": false
+                            }
+                        },
+                        {
+                            "name": "Новая дата окончания отпуска",
+                            "external_id": "c06510a9-9aeb-4675-9c7e-b6aefe5e21b4",
+                            "type": "date",
+                            "required": true
+                        },
+                        {
+                            "name": "Тип отпуска",
+                            "external_id": "a71a2970-f04c-4a26-a3f9-222f2c45d727",
+                            "type": "text",
+                            "required": true,
+                            "options": {
+                                "tooltip": {
+                                    "title": "Пример заполнения",
+                                    "description": "Укажите вид отпуска по которому осуществляется перенос",
+                                    "style": "disclaimer"
+                                },
+                                "catalog_address_payload_array": false
+                            }
+                        },
+                        {
+                            "name": "Перенос отпуска в связи с",
+                            "external_id": "1dd7895f-59ed-4786-9a12-34cc389281d4",
+                            "type": "choice",
+                            "options": {
+                                "choices": [
+                                    {
+                                        "label": "семейными обстоятельствами",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "label": "болезнью",
+                                        "value": "2"
+                                    },
+                                    {
+                                        "label": "командировкой",
+                                        "value": "3"
+                                    }
+                                ],
+                                "catalog_address_payload_array": false
+                            }
+                        }
+                    ],
+                    "template": {
+                        "file_id": 13570936,
+                        "placeholders": [
+                            {
+                                "key": "FirstDateFrom",
+                                "attribute": "Дата начала отпуска"
+                            },
+                            {
+                                "key": "FirstDateTo",
+                                "attribute": "Дата окончания отпуска"
+                            },
+                            {
+                                "key": "DateFrom",
+                                "attribute": "Новая дата начала отпуска"
+                            },
+                            {
+                                "key": "DateTo",
+                                "attribute": "Новая дата окончания отпуска"
+                            },
+                            {
+                                "key": "Reason",
+                                "attribute": "Перенос отпуска в связи с"
+                            },
+                            {
+                                "key": "Type",
+                                "attribute": "Тип отпуска"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "employee_cancelable": true,
+            "company_cancelable": true
+        },
+        {
+            "key": "step_2",
+            "state": {
+                "name": "Подписание заявления о переносе отпуска"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "sign",
+                    "is_employee": true,
+                    "document_type": "Заявление работника о переносе ежегодного оплачиваемого отпуска на другой срок",
+                    "signature_type": "unep"
+                }
+            ],
+            "deadline_settings": {
+                "settings": [
+                    {
+                        "reference": "attribute",
+                        "unit": "day",
+                        "term": -14,
+                        "attribute": "Новая дата начала отпуска",
+                        "outcome": "to_paper"
+                    }
+                ],
+                "mode": "min_date",
+                "reference": "",
+                "unit": "",
+                "term": 0
+            },
+            "employee_cancelable": true,
+            "company_cancelable": true
+        },
+        {
+            "key": "step_3",
+            "state": {
+                "name": "Проверка подписи"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "system_validate_sign",
+                    "document_type": "Заявление работника о переносе ежегодного оплачиваемого отпуска на другой срок"
+                }
+            ],
+            "company_cancelable": true
+        },
+        {
+            "key": "step_4_copy1_copy1",
+            "state": {
+                "name": "Согласование заявления о переносе отпуска"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "accept",
+                    "roles": [
+                        "Руководитель управленческий 1"
+                    ]
+                }
+            ],
+            "deadline_settings": {
+                "settings": [
+                    {
+                        "reference": "attribute",
+                        "unit": "day",
+                        "term": -14,
+                        "attribute": "Новая дата начала отпуска",
+                        "outcome": "to_paper"
+                    }
+                ],
+                "mode": "min_date",
+                "reference": "",
+                "unit": "",
+                "term": 0
+            },
+            "company_cancelable": true,
+            "manager_copies": {
+                "from": 1,
+                "count": 10,
+                "type": "operational",
+                "manager": true,
+                "assistant": false
+            }
+        },
+        {
+            "key": "step_5_return",
+            "state": {
+                "name": "Проверка документов"
+            },
+            "node_type": "middle",
+            "actions": [
+                {
+                    "type": "accept",
+                    "roles": [
+                        "Отдел кадров"
+                    ]
+                },
+                {
+                    "type": "return",
+                    "roles": [
+                        "Отдел кадров"
+                    ]
+                }
+            ],
+            "deadline_settings": {
+                "settings": [
+                    {
+                        "reference": "attribute",
+                        "unit": "day",
+                        "term": -14,
+                        "attribute": "Новая дата начала отпуска",
+                        "outcome": "to_paper"
+                    }
+                ],
+                "mode": "min_date",
+                "reference": "",
+                "unit": "",
+                "term": 0
+            },
+            "company_cancelable": true,
+            "notify_integration": true
+        },
+        {
+            "key": "finish",
+            "state": {
+                "name": "Завершено"
+            },
+            "node_type": "end",
+            "actions": [
+                {
+                    "type": "system"
+                }
+            ],
+            "company_cancelable": true
+        }
+    ],
+    "transitions": [
+        {
+            "from": "start",
+            "to": "step_1",
+            "action_type": "system"
+        },
+        {
+            "from": "step_1",
+            "to": "step_2",
+            "action_type": "generate_document_from_template"
+        },
+        {
+            "from": "step_2",
+            "to": "step_3",
+            "action_type": "sign"
+        },
+        {
+            "from": "step_3",
+            "to": "step_4_copy1_copy1",
+            "action_type": "system_validate_sign"
+        },
+        {
+            "from": "step_4_copy1_copy1",
+            "to": "step_5_return",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_5_return",
+            "to": "finish",
+            "action_type": "accept"
+        },
+        {
+            "from": "step_5_return",
+            "to": "step_1",
+            "action_type": "return"
+        }
+    ],
+    "validators": [
+        {
+            "type": "min_date",
+            "attributes": [
+                "Новая дата начала отпуска"
+            ],
+            "settings": {
+                "days_count": 14,
+                "working_days_only": false
+            }
+        },
+        {
+            "type": "min_date",
+            "attributes": [
+                "Дата начала отпуска"
+            ],
+            "settings": {
+                "days_count": 14,
+                "working_days_only": false
+            }
+        },
+        {
+            "type": "min_duration",
+            "attributes": [
+                "Дата начала отпуска",
+                "Дата окончания отпуска"
+            ],
+            "settings": {
+                "min_duration": 0,
+                "working_days_only": false,
+                "vacation_type": null
+            }
+        },
+        {
+            "type": "min_duration",
+            "attributes": [
+                "Новая дата начала отпуска",
+                "Новая дата окончания отпуска"
+            ],
+            "settings": {
+                "min_duration": 0,
+                "working_days_only": false,
+                "vacation_type": null
+            }
+        }
+    ]
+}
