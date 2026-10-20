@@ -1,0 +1,9 @@
+{
+  "external": {
+    "sourceLink": "https://docs.tech.vk.ru/nav/ru.nav.json"
+  },
+  "default": {
+    "group": "business-applications",
+    "item": "hrtek"
+  }
+}
