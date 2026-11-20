@@ -6,5 +6,6 @@
     "sectionTitle": "Досрочный выход из отпуска по уходу за ребенком",
     "icon": "",
     "weight": 0,
-    "uuid": ""
+    "uuid": "",
+    "hidden": true
   }
